@@ -1,0 +1,2 @@
+export const MAX_MESSAGE_LENGTH = 200;
+export const MESSAGE_TOO_LONG_LENGTH = MAX_MESSAGE_LENGTH + 1;

@@ -1,0 +1,67 @@
+<app-back-button [topNav]="true" tooltip="Annuler et revenir à la page précédente"></app-back-button>
+
+@if (isRoomLocked) {
+    <app-room-locked-popup (retry)="retryJoin()" (leave)="goHome()" />
+}
+<app-background-image src="assets/creation-background.png" />
+<div class="content">
+    <div class="panel panel-left">
+        <div class="panel-content">
+            <div class="panel-inner">
+                <app-character-selector
+                    [characters]="characters"
+                    [(selectedId)]="selectedCharacterId"
+                    [takenAvatars]="takenAvatars"
+                    (selectedIdChange)="saveState()"
+                ></app-character-selector>
+
+                <app-player-attributes [(bonus)]="bonus" [(d6AssignedTo)]="d6AssignedTo" (d6AssignedToChange)="saveState()">
+                </app-player-attributes>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel preview">
+        <div class="character-name-container">
+            <label class="character-label" for="character-name">Nom du personnage</label>
+            <input
+                id="character-name"
+                name="character-name"
+                type="text"
+                class="character-name-input"
+                [class.input-error]="showNameError"
+                placeholder="Entrez un nom..."
+                [maxlength]="playerNameMaxLength"
+                [(ngModel)]="characterName"
+                (ngModelChange)="saveState()"
+            />
+            <span class="name-char-counter" [class.name-char-counter-warning]="playerNameMaxLength - characterName.length <= 3">{{ playerNameMaxLength - characterName.length }} caractère(s) max</span>
+            @if(showNameError) {
+            <span class="error-message-hint">⚠ Ce champ est requis</span>
+            }
+        </div>
+        @if (showPreview) {
+            <img [src]="previewImage" class="character-preview" />
+        }
+    </div>
+
+    <div class="actions">
+        <button
+            class="btn"
+            (click)="generateRandomCharacter()"
+            matTooltip="Générer un personnage avec des attributs aléatoires"
+            matTooltipClass="game-tooltip"
+            matTooltipPosition="above">
+            Générer personnage aléatoire
+        </button>
+        <button
+            class="btn btn-confirm"
+            [disabled]="isWaiting"
+            (click)="proceed()"
+            [matTooltip]="isJoin ? 'Rejoindre la salle d\'attente avec ce personnage' : 'Confirmer et créer la salle d\'attente'"
+            matTooltipClass="game-tooltip"
+            matTooltipPosition="above">
+            {{ isJoin ? 'Rejoindre' : 'Continuer' }}
+        </button>
+    </div>
+</div>

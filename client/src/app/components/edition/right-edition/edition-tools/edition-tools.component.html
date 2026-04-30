@@ -1,0 +1,7 @@
+<div class="tile-container" [class.selected]="isSelected()" [class.disabled]="disabled()" (click)="onClickTileChoice()">
+    <img [src]="this.tile().imageSrc" id="tile-image" />
+    <!--A supprimer -->
+    <!-- @if (disabled()) {
+    <div class="disabled-overlay">Bientôt disponible</div>
+    } -->
+</div>

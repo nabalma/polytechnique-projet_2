@@ -1,0 +1,60 @@
+<div class="table-wrapper">
+    <table class="player-stats-table">
+        <thead>
+            <tr>
+                <th class="col-name" [class.active]="sortColumn === 'playerName'" (click)="sortBy('playerName')">
+                    <span class="th-content">Nom du joueur <span class="sort-icon">{{ getSortIcon('playerName') }}</span></span>
+                    <span class="col-tooltip">Nom du joueur</span>
+                </th>
+                <th [class.active]="sortColumn === 'combatCount'" (click)="sortBy('combatCount')">
+                    <span class="th-content">Combats <span class="sort-icon">{{ getSortIcon('combatCount') }}</span></span>
+                    <span class="col-tooltip">Nombre total de combats disputés</span>
+                </th>
+                <th [class.active]="sortColumn === 'victoryCount'" (click)="sortBy('victoryCount')">
+                    <span class="th-content">Victoires <span class="sort-icon">{{ getSortIcon('victoryCount') }}</span></span>
+                    <span class="col-tooltip">Nombre de combats remportés</span>
+                </th>
+                <th [class.active]="sortColumn === 'defeatCount'" (click)="sortBy('defeatCount')">
+                    <span class="th-content">Défaites <span class="sort-icon">{{ getSortIcon('defeatCount') }}</span></span>
+                    <span class="col-tooltip">Nombre de combats perdus</span>
+                </th>
+                <th [class.active]="sortColumn === 'totalHpLost'" (click)="sortBy('totalHpLost')">
+                    <span class="th-content">PV perdus <span class="sort-icon">{{ getSortIcon('totalHpLost') }}</span></span>
+                    <span class="col-tooltip">Total des points de vie perdus durant la partie</span>
+                </th>
+                <th [class.active]="sortColumn === 'totalHpDealt'" (click)="sortBy('totalHpDealt')">
+                    <span class="th-content">PV infligés <span class="sort-icon">{{ getSortIcon('totalHpDealt') }}</span></span>
+                    <span class="col-tooltip">Total des points de vie infligés aux adversaires</span>
+                </th>
+                <th [class.active]="sortColumn === 'visitedTerrainPercent'" (click)="sortBy('visitedTerrainPercent')">
+                    <span class="th-content">Terrain <span class="sort-icon">{{ getSortIcon('visitedTerrainPercent') }}</span></span>
+                    <span class="col-tooltip">Pourcentage des tuiles de terrain visitées</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (player of getSortedPlayers(); track player.playerId) {
+                <tr [class.abandoned]="player.isAbandoned"
+                    [class.winner]="isWinner(player)"
+                    [class.winner-red]="isWinner(player) && winnerTeam() === 'RED'"
+                    [class.winner-blue]="isWinner(player) && winnerTeam() === 'BLUE'">
+                    <td class="col-name">
+                        @if (isWinner(player)) {
+                            <span class="crown">♛</span>
+                        }
+                        <span class="player-name">{{ player.playerName }}</span>
+                        @if (player.isAbandoned) {
+                            <span class="abandoned-badge">Abandonné</span>
+                        }
+                    </td>
+                    <td>{{ player.combatCount }}</td>
+                    <td class="victories">{{ player.victoryCount }}</td>
+                    <td class="defeats">{{ player.defeatCount }}</td>
+                    <td>{{ player.totalHpLost }}</td>
+                    <td>{{ player.totalHpDealt }}</td>
+                    <td>{{ formatPercent(player.visitedTerrainPercent) }}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

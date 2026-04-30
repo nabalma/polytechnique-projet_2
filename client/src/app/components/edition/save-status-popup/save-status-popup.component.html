@@ -1,0 +1,47 @@
+<div class="popup-overlay" [class.popup-overlay--loading]="status() === saveStatus.Loading">
+    <div class="save-status-popup">
+
+        @if (status() === saveStatus.Loading) {
+            <div class="status-content">
+                <div class="spinner"></div>
+                <p class="status-message">Enregistrement en cours...</p>
+            </div>
+        }
+
+        @if (status() === saveStatus.Success) {
+            <div class="status-content">
+                <div class="success-icon">✓</div>
+                <p class="status-message">Jeu enregistré avec succès !</p>
+            </div>
+        }
+
+        @if (status() === saveStatus.NoChanges) {
+            <div class="status-content">
+                <div class="no-changes-icon">ℹ</div>
+                <p class="status-message">Aucun changement détecté. Voulez-vous quitter l'éditeur ?</p>
+                <div class="slot-action-boutons">
+                    <button id="quitter-button" (click)="onConfirmQuit()">Quitter</button>
+                    <button id="rester-button" (click)="onClose()">Rester</button>
+                </div>
+            </div>
+        }
+
+        @if (status() === saveStatus.Error) {
+            <div class="status-content">
+                <p class="error-title">Le jeu est invalide</p>
+                <ul class="error-list">
+                    @for (error of errors(); track error) {
+                        <li>{{ error }}</li>
+                    }
+                    @empty {
+
+                    }
+                </ul>
+                <div class="slot-action-boutons">
+                    <button id="fermer-button" (click)="onClose()">Fermer</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

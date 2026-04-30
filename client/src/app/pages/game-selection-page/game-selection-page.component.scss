@@ -1,0 +1,106 @@
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+:host {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    animation: pageFadeIn 0.35s ease-out both;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 30;
+}
+
+.page-title {
+    margin: 0 0 0.5rem;
+    font-size: 2.5rem;
+    color: #ffd87a;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-shadow:
+        0 0 20px rgba(255, 216, 122, 0.9),
+        0 3px 10px rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.game-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 12px rgba(255, 216, 122, 0.7));
+}
+
+.page-subtitle {
+    margin-bottom: 0;
+    margin-top: 4rem;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 700;
+    font-family: 'Georgia', serif;
+    color: #ffd87a;
+    text-shadow:
+        0 0 15px rgba(255, 216, 122, 0.8),
+        0 3px 10px rgba(0, 0, 0, 0.9);
+}
+
+.selection-panel {
+    position: relative;
+    left: 0;
+    top: 15%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10% 8%;
+    box-sizing: border-box;
+    z-index: 5;
+}
+
+.selection-panel ::ng-deep app-nav-arrows {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 43%;
+    transform: translateY(-50%);
+    padding: 0 2%;
+    z-index: 25;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 350px));
+    gap: 2rem;
+    height: auto;
+    max-height: 40%;
+    justify-content: center;
+    z-index: 20;
+    position: relative;
+    top: -25%;
+}
+
+.no-games {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: rgba(255, 216, 122, 0.8);
+    font-size: 1.6rem;
+    padding: 3rem;
+}

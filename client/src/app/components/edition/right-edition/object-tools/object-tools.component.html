@@ -1,0 +1,10 @@
+<div class="object-container" [class.selected]="isSelected() && !isDisabled" [class.disabled]="isDisabled" (click)="onClickObjectChoice()">
+    <img [src]="object()().imageSrc" id="object-image" />
+
+    @if (shouldShowQuantity) {
+    <div class="instances-container">
+        {{ object()().quantity }}
+    </div>
+    }
+
+</div>

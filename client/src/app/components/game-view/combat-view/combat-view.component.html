@@ -1,0 +1,174 @@
+@if (combatService.isInCombat() || combatService.combatResult()) {
+<div class="combat-backdrop">
+    <div class="combat-host">
+
+        @if (combatService.combatResult() && combatService.isLocalPlayerInCombat()) {
+            <div class="result-banner" [class.result-banner--win]="combatService.combatResult()!.isWin">
+                <span class="result-banner__icon">{{ combatService.combatResult()!.isWin ? '🏆' : '💀' }}</span>
+                <span class="result-banner__msg">{{ combatService.combatResult()!.message }}</span>
+                <button class="result-banner__close" (click)="combatService.dismissResult()">✕</button>
+            </div>
+        }
+
+        @if (combatService.isInCombat()) {
+
+            @if (combatService.isLocalPlayerInCombat()) {
+
+            <div class="combat-panel">
+
+                <div class="combat-panel__header">
+                    <span class="combat-panel__round">Tour {{ combatService.roundNumber() }}</span>
+                    <span class="combat-panel__title">⚔️ Combat</span>
+                    <div class="combat-timer" [class.combat-timer--urgent]="combatService.remainingTime() <= 3">
+                        <svg class="combat-timer__ring" viewBox="0 0 36 36">
+                            <circle class="combat-timer__track" cx="18" cy="18" r="15.9" />
+                            <circle class="combat-timer__fill" cx="18" cy="18" r="15.9"
+                                [style.stroke-dashoffset]="combatService.timerDashOffset()" />
+                        </svg>
+                        <span class="combat-timer__value">{{ combatService.remainingTime() }}</span>
+                    </div>
+                </div>
+
+                <div class="versus-row">
+                    <div class="fighter">
+                        <img class="fighter__avatar" [src]="combatService.initiator()?.avatar" />
+                        <span class="fighter__name">{{ combatService.initiator()?.name }}</span>
+                        <div class="fighter__hp-bar">
+                            <div class="fighter__hp-fill"
+                                [style.width.%]="(combatService.initiator()!.hp / combatService.initiator()!.maxHp) * 100">
+                            </div>
+                        </div>
+                        <span class="fighter__hp-text">{{ combatService.initiator()?.hp }} / {{ combatService.initiator()?.maxHp }} vie</span>
+                    </div>
+
+                    <span class="versus-label">VS</span>
+
+                    <div class="fighter">
+                        <img class="fighter__avatar" [src]="combatService.opponent()?.avatar" />
+                        <span class="fighter__name">{{ combatService.opponent()?.name }}</span>
+                        <div class="fighter__hp-bar">
+                            <div class="fighter__hp-fill"
+                                [style.width.%]="(combatService.opponent()!.hp / combatService.opponent()!.maxHp) * 100">
+                            </div>
+                        </div>
+                        <span class="fighter__hp-text">{{ combatService.opponent()?.hp }} / {{ combatService.opponent()?.maxHp }} vie</span>
+                    </div>
+                </div>
+
+                @if (combatService.lastRoundResult()) {
+                    <div class="dice-results">
+                        <span class="dice-results__label">Résultats — tour {{ combatService.roundNumber() - 1 }}</span>
+                        <div class="dice-row">
+
+                            @if (combatService.myRoundValues(); as myValues) {
+                                <div class="dice-block">
+                                    <span class="dice-block__name">Vous</span>
+                                    <div class="dice-block__row">
+                                        <span class="dice-block__label">Dé</span>
+                                        <span class="dice-block__value">🎲 {{ myValues.dieValue }}</span>
+                                    </div>
+                                    @if (myValues.chosenPosture) {
+                                        <div class="dice-block__row">
+                                            <span class="dice-block__label">Posture</span>
+                                            <span class="dice-block__posture">
+                                                {{ myValues.chosenPosture === posture.Offensive ? '+2 Attaque' : '+2 Défense' }}
+                                            </span>
+                                        </div>
+                                    }
+                                    <div class="dice-block__row">
+                                        <span class="dice-block__label">Dégâts reçus</span>
+                                        <span class="dice-block__damage">-{{ myValues.totalDamage }}</span>
+                                    </div>
+                                    <div class="dice-block__row">
+                                        <span class="dice-block__label">Vie restante</span>
+                                        <span class="dice-block__hp">{{ myValues.life }}</span>
+                                    </div>
+                                </div>
+                            }
+
+                            <span class="dice-separator">—</span>
+
+                            @if (combatService.opponentRoundValues(); as oppValues) {
+                                <div class="dice-block">
+                                    <span class="dice-block__name">{{ combatService.opponent()?.name }}</span>
+                                    <div class="dice-block__row">
+                                        <span class="dice-block__label">Dé</span>
+                                        <span class="dice-block__value">🎲 {{ oppValues.dieValue }}</span>
+                                    </div>
+                                    @if (oppValues.chosenPosture) {
+                                        <div class="dice-block__row">
+                                            <span class="dice-block__label">Posture</span>
+                                            <span class="dice-block__posture">
+                                                {{ oppValues.chosenPosture === posture.Offensive ? '+2 Attaque' : '+2 Défense' }}
+                                            </span>
+                                        </div>
+                                    }
+                                    <div class="dice-block__row">
+                                        <span class="dice-block__label">Dégâts reçus</span>
+                                        <span class="dice-block__damage">-{{ oppValues.totalDamage }}</span>
+                                    </div>
+                                    <div class="dice-block__row">
+                                        <span class="dice-block__label">Vie restante</span>
+                                        <span class="dice-block__hp">{{ oppValues.life }}</span>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                }
+
+
+                <div class="posture-section">
+                    <span class="posture-section__prompt">
+                        {{ combatService.hasChosenPosture() ? 'Posture choisie — modifiable avant la résolution' : 'Choisissez votre posture' }}
+                    </span>
+                    <div class="posture-buttons">
+                        <button class="posture-btn posture-btn--offensive"
+                                [class.posture-btn--selected]="combatService.selectedPosture() === posture.Offensive"
+                                (click)="combatService.choosePosture(posture.Offensive)">
+                            <span class="posture-btn__icon">⚔️</span>
+                            <span class="posture-btn__label">Offensive</span>
+                            <span class="posture-btn__bonus">+2 Attaque</span>
+                            @if (combatService.selectedPosture() === posture.Offensive) {
+                                <span class="posture-btn__check">✓</span>
+                            }
+                        </button>
+                        <button class="posture-btn posture-btn--defensive"
+                                [class.posture-btn--selected]="combatService.selectedPosture() === posture.Defensive"
+                                (click)="combatService.choosePosture(posture.Defensive)">
+                            <span class="posture-btn__icon">🛡️</span>
+                            <span class="posture-btn__label">Défensive</span>
+                            <span class="posture-btn__bonus">+2 Défense</span>
+                            @if (combatService.selectedPosture() === posture.Defensive) {
+                                <span class="posture-btn__check">✓</span>
+                            }
+                        </button>
+                    </div>
+                    @if (combatService.hasChosenPosture()) {
+                        <span class="posture-waiting">En attente de l'adversaire...</span>
+                    }
+                </div>
+
+            </div>
+
+            } @else {
+
+            <div class="spectator-banner">
+                <span class="spectator-banner__swords">⚔️</span>
+                <span class="spectator-banner__title">Combat — Tour {{ combatService.roundNumber() }}</span>
+                <span class="spectator-banner__sub">
+                    {{ combatService.initiator()?.name }} vs {{ combatService.opponent()?.name }}
+                </span>
+                <div class="spectator-banner__timer">
+                    <span class="spectator-banner__timer-label">Reprend dans</span>
+                    <span class="spectator-banner__timer-value">{{ combatService.remainingTime() }}</span>
+                </div>
+            </div>
+
+            }
+        }
+
+    </div>
+</div>
+}

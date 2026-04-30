@@ -1,0 +1,67 @@
+:host { display: contents; }
+
+$border: rgba(202, 164, 92, 0.45);
+$border-strong: rgba(202, 164, 92, 0.75);
+$gold: #ffd87a;
+$text: #e8d5a8;
+$text-dim: rgba(232, 213, 168, 0.5);
+
+.room-card {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 10px;
+    max-width: 340px;
+    background: rgba(35, 24, 13, 0.9);
+    border: 1px solid $border;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+
+    &:hover { border-color: $border-strong; }
+
+    &.active {
+        border: 3.5px solid $gold;
+        background: rgba(80, 60, 20, 0.95);
+        box-shadow: 0 0 14px rgba(255, 216, 122, 0.7), inset 0 0 8px rgba(255, 216, 122, 0.15);
+        outline: 1px solid rgba(255, 216, 122, 0.4);
+        outline-offset: 2px;
+    }
+}
+
+.room-select-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+}
+
+.room-name {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: $text;
+}
+
+.room-players {
+    font-size: 0.62rem;
+    color: $text;
+}
+
+.join-button {
+    padding: 4px 10px;
+    background: rgba(120, 100, 61, 0.93);
+    border: 2px solid #caa45c;
+    border-radius: 6px;
+    color: #f6e6c9;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover { background: rgba(150, 125, 75, 0.95); }
+}

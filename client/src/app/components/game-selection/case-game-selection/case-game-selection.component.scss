@@ -1,0 +1,133 @@
+.case-card {
+    position: relative;
+    width: 100%;
+    height: 80%;
+    background: rgba(30, 20, 10, 0.88);
+    border: 3px solid rgba(202, 164, 92, 0.6);
+    color: #f6e6c9;
+    border-radius: 16px;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(202, 164, 92, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.6),
+            0 0 20px rgba(255, 216, 122, 0.3);
+        border-color: #ffd87a;
+    }
+}
+
+
+.card-top {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: #1a100a;
+}
+
+.card-top::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(255, 216, 122, 0.18),
+            transparent 65%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 12px,
+            rgba(255, 216, 122, 0.07) 14px,
+            transparent 18px
+        );
+
+    mask-image: radial-gradient(circle at 50% 0%, black 60%, transparent 100%);
+    mix-blend-mode: screen;
+    z-index: 1;
+}
+
+.card-top ::ng-deep app-game-image,
+.card-top ::ng-deep app-game-image > * {
+    width: 300%;
+    height: 300%;
+    display: block;
+}
+
+.card-top ::ng-deep app-game-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.card-bottom {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.header-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.game-title {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffd87a;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px rgba(255, 216, 122, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.badges-row {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: rgba(202, 164, 92, 0.25);
+    border: 2px solid rgba(202, 164, 92, 0.5);
+    color: #ffd87a;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.description-text {
+    margin: 0;
+    font-size: 1rem;
+    color: rgba(246, 230, 201, 0.8);
+    line-height: 1.5;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

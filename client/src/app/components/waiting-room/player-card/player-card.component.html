@@ -1,0 +1,56 @@
+<div class="player-card"
+    [class.organizer]="isOrganizer()"
+    [class.virtual-player]="player().isVirtual"
+    [class.current-player]="isCurrentPlayer()"
+    [class.team-red]="player().team === team.RED"
+    [class.team-blue]="player().team === team.BLUE">
+
+    <div class="avatar-wrapper">
+        <img [src]="player().avatar" [alt]="player().name" class="avatar" />
+
+        @if (isOrganizer() && isCurrentPlayer()) {
+            <span class="organizer-badge">ORGANISATEUR · VOUS</span>
+        } @else if (isOrganizer()) {
+            <span class="organizer-badge">ORGANISATEUR</span>
+        } @else if (isCurrentPlayer()) {
+            <span class="organizer-badge">VOUS</span>
+        }
+
+        @if (player().isVirtual) {
+            <span class="virtual-badge">JV</span>
+        }
+    </div>
+
+    <div class="player-info">
+        <span class="player-name">{{ player().name }}</span>
+        <span class="player-role">{{ roleLabel }}</span>
+    </div>
+
+    <div class="actions">
+        @if (canKick()) {
+            <button
+                class="kick-btn"
+                (click)="onKick()"
+                matTooltip="Exclure ce joueur de la salle"
+                matTooltipClass="game-tooltip"
+                matTooltipPosition="left">
+                ✕
+            </button>
+        }
+    </div>
+
+</div>
+
+@if (showKickConfirm) {
+<div class="kick-confirm-overlay" (click)="onCancelKick()">
+    <div class="kick-confirm-popup" (click)="$event.stopPropagation()">
+        <p class="kick-confirm-message">
+            Voulez-vous vraiment exclure <strong>{{ player().name }}</strong> de la salle ?
+        </p>
+        <div class="kick-confirm-actions">
+            <button class="kick-confirm-cancel" (click)="onCancelKick()">Annuler</button>
+            <button class="kick-confirm-ok" (click)="onConfirmKick()">Exclure</button>
+        </div>
+    </div>
+</div>
+}

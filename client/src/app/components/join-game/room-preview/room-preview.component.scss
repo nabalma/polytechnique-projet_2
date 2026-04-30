@@ -1,0 +1,89 @@
+:host {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    align-items: flex-end;
+}
+
+.frame-inner {
+    width: 100%;
+    height: 86%;
+    background: url('../../../../assets/panel-preview-join-game.png') center / 100% 100% no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10% 8% 8%;
+    container-type: inline-size;
+    container-name: frame;
+
+    app-game-grid { zoom: 0.7; }
+}
+
+.preview-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #3d2208;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+}
+
+@container frame (min-width: 400px) { .frame-inner app-game-grid { zoom: 0.4; } }
+@container frame (min-width: 450px) { .frame-inner app-game-grid { zoom: 0.45; } }
+@container frame (min-width: 500px) { .frame-inner app-game-grid { zoom: 0.5; } }
+@container frame (min-width: 550px) { .frame-inner app-game-grid { zoom: 0.55; } }
+@container frame (min-width: 600px) { .frame-inner app-game-grid { zoom: 0.6; } }
+@container frame (min-width: 650px) { .frame-inner app-game-grid { zoom: 0.65; } }
+@container frame (min-width: 700px) { .frame-inner app-game-grid { zoom: 0.7; } }
+
+.players-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.players-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #3d2208;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.players-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.player-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid #caa45c;
+    object-fit: cover;
+}
+
+.player-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #3d2208;
+    text-align: center;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

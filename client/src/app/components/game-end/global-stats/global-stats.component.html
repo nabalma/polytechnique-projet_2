@@ -1,0 +1,41 @@
+@if (stats(); as s) {
+    <div class="stats-pills">
+        <div class="stat-pill">
+            <span class="pill-label">Durée</span>
+            <span class="pill-value">{{ formatDuration(s.gameDurationMs) }}</span>
+        </div>
+        <div class="pill-separator"></div>
+        <div class="stat-pill">
+            <span class="pill-label">Tours</span>
+            <span class="pill-value">{{ s.totalTurns }}</span>
+        </div>
+        <div class="pill-separator"></div>
+        <div class="stat-pill">
+            <span class="pill-label">Terrain visité</span>
+            <span class="pill-value">{{ formatPercent(s.visitedTerrainGlobalPercent) }}</span>
+        </div>
+        @if (s.hasDoors) {
+            <div class="pill-separator"></div>
+            <div class="stat-pill">
+                <span class="pill-label">Portes manipulées</span>
+                <span class="pill-value">{{ formatPercent(s.doorUsagePercent) }}</span>
+            </div>
+        }
+        @if (s.hasSanctuaries) {
+            <div class="pill-separator"></div>
+            <div class="stat-pill">
+                <span class="pill-label">Sanctuaires utilisés</span>
+                <span class="pill-value">{{ formatPercent(s.sanctuaryUsagePercent) }}</span>
+            </div>
+        }
+        @if (s.isCTFMode) {
+            <div class="pill-separator"></div>
+            <div class="stat-pill stat-pill-ctf">
+                <span class="pill-label">Porteurs du drapeau</span>
+                <span class="pill-value">{{ s.differentFlagHoldersCount }}</span>
+            </div>
+        }
+    </div>
+} @else {
+    <p class="stats-empty">Aucune statistique disponible.</p>
+}

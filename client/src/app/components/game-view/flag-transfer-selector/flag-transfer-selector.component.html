@@ -1,0 +1,18 @@
+<div class="overlay" (click)="cancelled.emit()">
+    <div class="selector-panel" (click)="$event.stopPropagation()">
+        <h3 class="selector-title">🚩 Transférer le drapeau</h3>
+        <p class="selector-subtitle">
+            {{ currentPlayerHasFlag() ? 'Donner le drapeau à :' : 'Demander le drapeau à :' }}
+        </p>
+        <ul class="targets-list">
+            @for (player of eligibleTargets(); track player.id) {
+                <li class="target-item" (click)="targetSelected.emit(player.id ?? '')">
+                    <img class="target-avatar" [src]="player.avatarMini" [alt]="player.name" />
+                    <span class="target-name">{{ player.name }}</span>
+                    <span class="target-action">{{ currentPlayerHasFlag() ? 'Donner' : 'Demander' }}</span>
+                </li>
+            }
+        </ul>
+        <button class="btn-cancel" type="button" (click)="cancelled.emit()">Annuler</button>
+    </div>
+</div>

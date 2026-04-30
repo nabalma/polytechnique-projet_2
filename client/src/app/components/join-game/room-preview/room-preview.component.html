@@ -1,0 +1,15 @@
+<div class="frame-inner">
+    <span class="preview-title">{{ room().gameName }}</span>
+    <app-game-grid [gameMap]="room().gameMap"/>
+    <div class="players-preview">
+        <span class="players-label">Joueurs présents :</span>
+        <div class="players-row">
+            @for (player of room().roomPlayers; track player.name) {
+            <div class="player">
+                <img class="player-avatar" [src]="player.avatar" [alt]="player.name" />
+                <span class="player-name">{{ player.name }}</span>
+            </div>
+            }
+        </div>
+    </div>
+</div>

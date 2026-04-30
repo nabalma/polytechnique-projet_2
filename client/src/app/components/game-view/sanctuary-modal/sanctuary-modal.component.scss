@@ -1,0 +1,133 @@
+$gold:        #deba68;
+$gold-bright: #e8a830;
+$gold-dim:    rgba(180, 145, 75, 0.65);
+$panel-bg:    rgba(20, 14, 6, 0.95);
+
+.sanctuary-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    pointer-events: all;
+
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.72);
+        backdrop-filter: blur(3px);
+    }
+}
+
+.sanctuary-modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.4rem 3rem 2rem;
+    width: 380px;
+    max-width: 95vw;
+    background: $panel-bg;
+    border-radius: 18px;
+    border: 2px solid $gold-dim;
+    box-shadow:
+        0 0 60px rgba(255, 200, 80, 0.12),
+        0 12px 48px rgba(0, 0, 0, 0.75),
+        inset 0 1px 0 rgba(202, 164, 92, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fef3c7;
+    animation: modalAppear 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+    &::before,
+    &::after {
+        content: '✦';
+        position: absolute;
+        font-size: 1rem;
+        color: $gold-dim;
+        top: 0.8rem;
+    }
+    &::before { left:  1rem; }
+    &::after  { right: 1rem; }
+}
+
+.sanctuary-icon {
+    font-size: 2.6rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 12px rgba(255, 200, 80, 0.6));
+}
+
+.sanctuary-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $gold;
+    text-shadow:
+        0 0 12px rgba(255, 200, 80, 0.5),
+        0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.sanctuary-description {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-align: center;
+    color: rgba(254, 243, 199, 0.75);
+    line-height: 1.5;
+    max-width: 280px;
+}
+
+.sanctuary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+    margin-top: 0.4rem;
+}
+
+.btn {
+    width: 100%;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+
+    &:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.15);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.btn-normal {
+    background: rgba(40, 130, 70, 0.85);
+    border-color: rgba(60, 200, 100, 0.4);
+    color: #d4f5e2;
+}
+
+.btn-double {
+    background: rgba(140, 80, 20, 0.85);
+    border-color: rgba(220, 140, 50, 0.5);
+    color: #fde8c8;
+}
+
+.btn-cancel {
+    background: rgba(60, 40, 20, 0.7);
+    border-color: $gold-dim;
+    color: rgba(254, 243, 199, 0.55);
+}
+
+@keyframes modalAppear {
+    from { transform: scale(0.88) translateY(12px); opacity: 0; }
+    to   { transform: scale(1)    translateY(0);    opacity: 1; }
+}

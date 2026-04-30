@@ -1,0 +1,155 @@
+:root {
+    --grid-size: 20;
+    --grid-style: 29px;
+}
+
+.grid-case-container {
+    display: grid;
+    width: fit-content;
+    grid-template-columns: repeat(var(--grid-size), var(--grid-style));
+    grid-template-rows: repeat(var(--grid-size), var(--grid-style));
+    max-width: 100%;
+    overflow: auto;
+    margin: 10px auto;
+}
+
+.cell-container {
+    width: var(--grid-style);
+    height: var(--grid-style);
+    border: solid 1px black;
+    box-sizing: border-box;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+}
+
+.tile-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.object-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.sanctuary-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+#image-cell {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.map-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 6px);
+    transform: translateX(-50%);
+    min-width: 120px;
+    max-width: 220px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #111;
+    background: rgba(255, 255, 255, 0.96);
+    color: #111;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: center;
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.sanctuary-overwrite-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.sanctuary-overwrite-modal {
+    background: rgba(20, 14, 8, 0.97);
+    border: 2px solid rgba(202, 164, 92, 0.7);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+.sanctuary-overwrite-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ffd87a;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin: 0 0 0.75rem;
+}
+
+.sanctuary-overwrite-message {
+    color: #f0d9a8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem;
+}
+
+.sanctuary-overwrite-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-confirm {
+    padding: 0.5rem 1.4rem;
+    border-radius: 8px;
+    border: 2px solid #e05252;
+    background: rgba(224, 82, 82, 0.15);
+    color: #e05252;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(224, 82, 82, 0.3);
+    }
+}
+
+.btn-cancel {
+    padding: 0.5rem 1.4rem;
+    border-radius: 8px;
+    border: 2px solid rgba(202, 164, 92, 0.6);
+    background: rgba(202, 164, 92, 0.1);
+    color: #caa45c;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(202, 164, 92, 0.2);
+    }
+}

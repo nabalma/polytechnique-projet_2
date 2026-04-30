@@ -1,0 +1,60 @@
+$gold: #ffd87a;
+$gold-dim: rgba(202, 164, 92, 0.4);
+$bg-active: rgba(202, 164, 92, 0.18);
+$bg-hover: rgba(202, 164, 92, 0.32);
+$text: #e8d5a8;
+
+.start-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.start-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1.4rem;
+    background: $bg-active;
+    border: 2px solid $gold-dim;
+    border-radius: 8px;
+    color: $gold;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 220px;
+
+    &:hover:not(:disabled) {
+        background: $bg-hover;
+        border-color: $gold;
+        box-shadow: 0 0 12px rgba(202, 164, 92, 0.25);
+    }
+
+    &:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        border-color: rgba(202, 164, 92, 0.2);
+    }
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+}
+
+.btn-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+.btn-sub {
+    font-size: 0.68rem;
+    color: rgba(232, 213, 168, 0.55);
+    letter-spacing: 0.03em;
+}

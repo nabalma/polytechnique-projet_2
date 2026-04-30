@@ -1,0 +1,34 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+}
+
+.nav-arrow {
+    width: 75px;
+    height: 75px;
+    border-radius: 14px;
+    font-size: 3.5rem;
+    font-weight: 900;
+    border: 3px solid rgba(202, 164, 92, 0.7);
+    background: rgba(30, 20, 10, 0.88);
+    color: #ffd87a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+
+    &:hover:not(:disabled) {
+        transform: scale(1.08);
+        border-color: #ffd87a;
+        box-shadow: 0 0 20px rgba(255, 216, 122, 0.3);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}

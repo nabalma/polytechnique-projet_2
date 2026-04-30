@@ -1,0 +1,58 @@
+<div class="notifications-host">
+
+    @if (notificationService.gameStartMessage()) {
+        <div class="overlay overlay--start">
+            <div class="overlay__backdrop"></div>
+            <div class="overlay__content">
+                <span class="overlay__eyebrow">La bataille commence dans</span>
+                <span class="overlay__countdown">{{ notificationService.gameStartMessage() }}</span>
+                <span class="overlay__sub">Préparez-vous !</span>
+            </div>
+        </div>
+    }
+
+    @if (notificationService.isGameOver()) {
+        <div class="overlay"
+             [class.overlay--win]="notificationService.isGameWon()"
+             [class.overlay--lose]="!notificationService.isGameWon()">
+            <div class="overlay__backdrop"></div>
+            <div class="overlay__content">
+                <span class="overlay__trophy">
+                    {{ notificationService.isGameWon() ? '🏆' : '💀' }}
+                </span>
+                <span class="overlay__gameover-title">
+                    {{ notificationService.isGameWon() ? 'Victoire !' : 'Défaite' }}
+                </span>
+                <span class="overlay__gameover-msg">
+                    {{ notificationService.gameOverResult()?.message }}
+                </span>
+            </div>
+        </div>
+    }
+
+    <div class="toast-stack">
+
+        @if (notificationService.transitionMessage()) {
+            <div class="toast toast--transition">
+                <span class="toast__icon">⚔️</span>
+                <span class="toast__text">{{ notificationService.transitionMessage() }}</span>
+            </div>
+        }
+
+        @if (notificationService.combatMessage()) {
+            <div class="toast toast--combat">
+                <span class="toast__icon">🗡️</span>
+                <span class="toast__text">{{ notificationService.combatMessage() }}</span>
+            </div>
+        }
+
+        @if (notificationService.moveErrorMessage()) {
+            <div class="toast toast--error">
+                <span class="toast__icon">⚠️</span>
+                <span class="toast__text">{{ notificationService.moveErrorMessage() }}</span>
+            </div>
+        }
+
+    </div>
+
+</div>

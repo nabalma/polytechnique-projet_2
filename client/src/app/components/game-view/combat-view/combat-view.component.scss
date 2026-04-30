@@ -1,0 +1,475 @@
+$gold:      #deba68;
+$gold-dim:  rgba(180, 145, 75, 0.55);
+$panel-bg:  rgba(18, 11, 4, 0.96);
+$red:       #d95555;
+$red-dim:   rgba(200, 60, 60, 0.5);
+$green:     #6dd98a;
+$green-dim: rgba(80, 200, 110, 0.4);
+$orange:    #e8943a;
+$blue:      #6aaee8;
+$blue-dim:  rgba(80, 140, 220, 0.5);
+$cream-white : #f8f8f8;
+
+:host { display: contents; pointer-events: none; }
+
+.combat-host {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.combat-backdrop {
+    position: absolute;
+    z-index: 150;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    
+}
+
+.result-banner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 2rem;
+    background: $panel-bg;
+    border: 2px solid $red-dim;
+    border-radius: 16px;
+    pointer-events: all;
+    animation: panelIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+    &--win { border-color: $green-dim; .result-banner__msg { color: $green; } }
+
+    &__icon { font-size: 2rem; }
+    &__msg {
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: $red;
+    }
+    &__close {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.35);
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        transition: color 0.15s;
+        &:hover { color: rgba(255,255,255,0.85); }
+    }
+}
+
+.combat-panel {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    width: min(500px, 92vw);
+    padding: 1.3rem 1.5rem 1.5rem;
+    background: $panel-bg;
+    border: 2px solid $gold-dim;
+    border-radius: 18px;
+    box-shadow:
+        0 0 50px rgba(220, 80, 80, 0.1),
+        0 8px 40px rgba(0, 0, 0, 0.85),
+        inset 0 1px 0 rgba(180, 145, 75, 0.18);
+    pointer-events: all;
+    animation: panelIn 0.3s ease forwards;
+
+    &::before, &::after {
+        content: '✦';
+        position: absolute;
+        font-size: 0.85rem;
+        color: $gold-dim;
+        top: 0.7rem;
+    }
+    &::before { left:  0.9rem; }
+    &::after  { right: 0.9rem; }
+}
+
+.combat-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(180, 145, 75, 0.15);
+}
+
+.combat-panel__round {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(220, 180, 100, 0.55);
+    background: rgba(180, 145, 75, 0.1);
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+    border: 1px solid rgba(180, 145, 75, 0.25);
+}
+
+.combat-panel__title {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $gold;
+    text-shadow: 0 0 10px rgba(220, 180, 100, 0.35);
+}
+
+.combat-timer {
+    position: relative;
+    width: 40px;
+    height: 40px;
+
+    &__ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+    &__track { fill: none; stroke: rgba(255,255,255,0.07); stroke-width: 3; }
+    &__fill {
+        fill: none;
+        stroke: $gold;
+        stroke-width: 3;
+        stroke-dasharray: 100;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.9s linear, stroke 0.3s;
+    }
+    &__value {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: $gold;
+    }
+
+    &--urgent {
+        .combat-timer__fill  { stroke: $red; }
+        .combat-timer__value { color: $red; animation: urgentPulse 0.5s ease infinite; }
+    }
+}
+
+.versus-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.versus-label {
+    font-size: 1rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.2);
+    flex-shrink: 0;
+}
+
+.fighter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.28rem;
+    flex: 1;
+
+    &__avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid $gold-dim;
+        object-fit: cover;
+    }
+    &__name {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: $gold;
+        letter-spacing: 0.05em;
+        max-width: 110px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    &__ice-penalty {
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: #93c5fd;
+        background: rgba(147, 197, 253, 0.12);
+        border: 1px solid rgba(147, 197, 253, 0.35);
+        border-radius: 4px;
+        padding: 1px 5px;
+        letter-spacing: 0.03em;
+    }
+    &__hp-bar {
+        width: 100%;
+        height: 5px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 3px;
+        overflow: hidden;
+    }
+    &__hp-fill {
+        height: 100%;
+        background: $green;
+        border-radius: 3px;
+        transition: width 0.4s ease;
+    }
+    &__hp-text {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: rgba(110, 217, 138, 0.8);
+        letter-spacing: 0.03em;
+    }
+}
+
+.dice-results {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 0.9rem;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(180, 145, 75, 0.18);
+    border-radius: 10px;
+    animation: diceReveal 0.25s ease forwards;
+}
+
+.dice-results__label {
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(220, 180, 100, 0.45);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.dice-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.dice-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+    flex: 1;
+
+    &__name {
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: rgba(220, 180, 100, 0.5);
+        text-transform: uppercase;
+        margin-bottom: 0.2rem;
+    }
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    &__label {
+        font-size: 0.6rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.35);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+    }
+    &__value {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 700;
+    }
+    &__posture {
+        font-size: 0.72rem;
+        color: $green;
+        font-weight: 700;
+    }
+    &__damage {
+        font-size: 0.75rem;
+        color: $red;
+        font-weight: 900;
+    }
+    &__hp {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: rgba(110, 217, 138, 0.85);
+    }
+}
+
+.dice-separator {
+    color: rgba(255,255,255,0.15);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+}
+
+.dice-damage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.35rem;
+    border-top: 1px solid rgba(180, 145, 75, 0.12);
+
+    &__hit {
+        font-size: 0.95rem;
+        font-weight: 900;
+        color: $red;
+        animation: damageFlash 0.35s ease;
+    }
+    &__blocked {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $green;
+    }
+}
+
+.posture-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__prompt {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        text-align: center;
+        color: rgba(220, 180, 100, 0.5);
+    }
+}
+
+.posture-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+}
+
+.posture-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.7rem 0.5rem;
+    background: rgba(30, 20, 10, 0.7);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+
+    &__icon  { font-size: 1.3rem; }
+    &__label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+    &__bonus { font-size: 0.6rem; font-weight: 700; opacity: 0.7; color:  $cream-white}
+    &__check {
+        position: absolute;
+        top: 0.4rem;
+        right: 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 900;
+    }
+
+    &--offensive {
+        border: 2px solid rgba(200, 80, 80, 0.45);
+        .posture-btn__label { color: #e88080; }
+        .posture-btn__check { color: $red; }
+
+        &:hover { background: rgba(200, 50, 50, 0.15); border-color: $red; transform: translateY(-2px); }
+
+        &.posture-btn--selected {
+            background: rgba(200, 50, 50, 0.2);
+            border-color: $red;
+            box-shadow: 0 0 16px rgba(200, 60, 60, 0.25);
+        }
+    }
+
+    &--defensive {
+        border: 2px solid $blue-dim;
+        .posture-btn__label { color: $blue; }
+        .posture-btn__check { color: $blue; }
+
+        &:hover { background: rgba(50, 100, 200, 0.15); border-color: $blue; transform: translateY(-2px); }
+
+        &.posture-btn--selected {
+            background: rgba(50, 100, 200, 0.2);
+            border-color: $blue;
+            box-shadow: 0 0 16px rgba(60, 120, 220, 0.25);
+        }
+    }
+
+    &:active { transform: translateY(0); }
+}
+
+.posture-waiting {
+    text-align: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(220, 180, 100, 0.4);
+    animation: waitingPulse 1.6s ease-in-out infinite;
+}
+
+.spectator-banner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.4rem 2.4rem;
+    background: $panel-bg;
+    border: 2px solid $gold-dim;
+    border-radius: 16px;
+    pointer-events: none;
+    animation: panelIn 0.3s ease forwards;
+
+    &__swords { font-size: 1.8rem; animation: spectatorPulse 1.4s ease-in-out infinite; }
+    &__title  { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: $gold; }
+    &__sub    { font-size: 0.7rem; font-weight: 600; color: rgba(220, 180, 100, 0.5); }
+
+    &__timer {
+        display: flex;
+        align-items: baseline;
+        gap: 0.4rem;
+        margin-top: 0.3rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(180, 145, 75, 0.18);
+        width: 100%;
+        justify-content: center;
+    }
+    &__timer-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(220, 180, 100, 0.4); }
+    &__timer-value { font-size: 1.05rem; font-weight: 900; color: $gold; }
+}
+
+@keyframes panelIn {
+    from { transform: translateY(14px) scale(0.97); opacity: 0; }
+    to   { transform: translateY(0)    scale(1);    opacity: 1; }
+}
+@keyframes diceReveal {
+    from { transform: translateY(-5px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes damageFlash {
+    0%   { transform: scale(1.35); }
+    100% { transform: scale(1); }
+}
+@keyframes urgentPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.35; }
+}
+@keyframes waitingPulse {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1; }
+}
+@keyframes spectatorPulse {
+    0%, 100% { transform: scale(1);    opacity: 0.7; }
+    50%       { transform: scale(1.15); opacity: 1; }
+}

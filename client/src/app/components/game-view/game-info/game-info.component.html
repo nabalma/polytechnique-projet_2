@@ -1,0 +1,17 @@
+<div class="game-info-panel">
+    <h2 class="panel-header">Informations de partie</h2>
+    <div class="info-content">
+        <div class="info-row">
+            <span class="info-label">Taille:</span>
+            <span class="info-value">{{ gridSize() }}x{{ gridSize() }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Joueurs:</span>
+            <span class="info-value">{{ playerCount() }} / {{ maxPlayers() }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Actif:</span>
+            <span class="info-value active-player">{{ activePlayerName() || '—' }}</span>
+        </div>
+    </div>
+</div>

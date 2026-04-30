@@ -1,0 +1,29 @@
+<nav class="nav-menu">
+    <button
+        class="hamburger-btn"
+        (click)="toggleMenu()"
+        (mouseenter)="openMenu()"
+        [class.active]="isMenuOpen">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <div
+        class="dropdown-menu"
+        [class.open]="isMenuOpen"
+        (mouseleave)="closeMenu()">
+        <a routerLink="/home" class="menu-item" (click)="closeMenu()">
+            Accueil
+        </a>
+        <a routerLink="/administration" class="menu-item" (click)="closeMenu()">
+            Administration
+        </a>
+        <a routerLink="/game-selection" class="menu-item" (click)="closeMenu()">
+            Créer une partie
+        </a>
+        <a class="menu-item disabled">
+            Joindre une partie
+        </a>
+    </div>
+</nav>

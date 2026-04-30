@@ -1,0 +1,70 @@
+.rules-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rules-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rules-mode-badge {
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+    background: rgba(202, 164, 92, 0.2);
+    border: 1px solid rgba(202, 164, 92, 0.5);
+    color: #fbbf24;
+}
+
+.rules-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(202, 164, 92, 0.2);
+}
+
+.rule-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    width: 1.375rem;
+    text-align: center;
+    margin-top: 0.05rem;
+}
+
+.rule-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.rule-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #fbbf24;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.rule-description {
+    font-size: 0.7rem;
+    color: #fef3c7;
+    line-height: 1.4;
+}

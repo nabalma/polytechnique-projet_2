@@ -1,0 +1,76 @@
+<app-navigation-page></app-navigation-page>
+<app-back-button [topNav]="true" tooltip="Revenir à l'accueil"></app-back-button>
+
+<app-background-image src="assets/background-image-administration.jpeg" alt="Background Administration" />
+
+<div class="page-header">
+        <div class="admin-title">
+            <span class="game-icon">🎮</span>
+            <h1>Administration des Jeux</h1>
+        </div>
+    </div>
+
+    <section class="panel-section">
+        <div class="selection-panel">
+            <img class="panel-image" src="assets/administration-page-panel.png" alt="Panel" />
+
+            <app-nav-arrows
+                [canGoPrev]="navigationService.canGoPrev()"
+                [canGoNext]="canGoNext()"
+                (previous)="navigationService.goPrev()"
+                (next)="goNext()"
+            />
+
+            <div class="panel-content">
+                <div class="panel-top">
+                    <div class="admin-search">
+                        <input type="text" (input)="onChangeSearchName($event)" placeholder="Recherche par Nom / Filtre (optionnel)" />
+                    </div>
+
+                    <button type="button" class="btn-create" (click)="openCreatePopup()">+ Créer un nouveau jeu</button>
+                </div>
+
+                <div class="games-area">
+                    <div class="games-grid">
+                        @for (game of visibleGames(); track game._id) {
+                        <app-case-game-administration [gameInformation]="
+                        {
+                          name : game.name,
+                          gridSize : game.grid.gridSize,
+                          imageUrl : administrationService.createQualityImage(game.imageUrl),
+                          isVisible : game.isVisible,
+                          mode : game.mode,
+                          description : game.description,
+                          createdAt : game.createdAt,
+                          updateAt : game.updateAt,
+                          _id : game._id ?? '',
+                        }
+                        " (deleteRequestGame)="removeGame($event)"/>
+                        } @empty {
+                        <p class="no-games">Aucun jeu disponible.</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="panel-indicator">
+                    <app-page-indicator [currentPage]="navigationService.pageIndex() + 1" [totalPages]="totalPages()" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @if(isCreatePopupOpen){
+    <div class="modal-backdrop" (click)="closeCreatePopup()"></div>
+
+    <app-creation-game-pop-up class="modal" (cancel)="closeCreatePopup()" (create)="onCreateStep1($event)" (click)="$event.stopPropagation()" />
+    } @if(isDeleteConfirmationOpen){
+    <div class="modal-backdrop" (click)="closeDeleteConfirmation()"></div>
+
+    <app-pop-up-confirmation-supp
+        class="modal"
+        [message]="'Êtes-vous sûr de vouloir supprimer « ' + (gameNameToDelete || '') + ' » ?'"
+        (confirm)="confirmDelete()"
+        (cancel)="closeDeleteConfirmation()"
+        (click)="$event.stopPropagation()"
+    />
+    }

@@ -1,0 +1,110 @@
+@if (tilePopupVisible && tilePopupCell) {
+    <app-tile-info-popup
+        [cellInfo]="tilePopupCell"
+        [player]="tilePopupPlayer"
+        [x]="tilePopupX"
+        [y]="tilePopupY"
+        (closed)="closeTilePopup()"
+    />
+}
+@if (flagTransferService.showSelector()) {
+    <app-flag-transfer-selector
+        [eligibleTargets]="flagTransferService.adjacentEligibleTargets"
+        [currentPlayerHasFlag]="currentPlayerHasFlag"
+        (targetSelected)="flagTransferService.requestTransfer($event)"
+        (cancelled)="flagTransferService.closeSelector()"
+    />
+}
+
+@if (matchService.pendingTransferRequest()) {
+    <app-flag-transfer-popup
+        [request]="matchService.pendingTransferRequest()!"
+        (accepted)="onAcceptTransfer()"
+        (refused)="onRefuseTransfer()"
+    />
+}
+
+<button class="button-rules" (click)="showRulesPanel = !showRulesPanel">Règles</button>
+
+@if (showAbandonConfirm) {
+    <app-abandon-confirm-popup
+        (confirmed)="onAbandonConfirmed()"
+        (cancelled)="onAbandonCancelled()"
+    />
+}
+
+@if (matchService.gameOverData() && !matchService.gameOverData()?.cancelled) {
+    <app-game-over-popup
+        [gameOver]="matchService.gameOverData()!"
+        (closed)="onGameOverClosed()"
+    />
+}
+
+@if (sanctuaryService.showModal()) {
+    <app-sanctuary-modal />
+}
+
+@if (showRulesPanel) {
+    <app-game-rules-modal
+        [gameMode]="stateService.gameMode()"
+        (closed)="showRulesPanel = false"
+    />
+}
+
+<app-combat-interface></app-combat-interface>
+<app-debug-overlay [isDebugMode]="matchService.isDebugMode"></app-debug-overlay>
+
+<app-background-image src="assets/background-image-game.jpeg" alt="Background Game" />
+<img src="assets/background-image-game-view.png" alt="" class="frame-image" />
+
+<div class="content">
+    <aside class="left-panel">
+        <app-player-stats-panel></app-player-stats-panel>
+        <app-message-zone [gameId]="gameId" [playerName]="playerName"
+            [isAbandoned]="matchService.hasAbandoned" [logEntries]="matchService.getLogs()()" />
+    </aside>
+
+    <main class="center-area">
+        <div class="game-title">{{ stateService.gameName() || 'Bataille Épique' }}</div>
+        <app-game-notification />
+        <div class="game-board-container">
+            @if (mapService.gameMap; as gameMap) {
+                <app-game-grid
+                    [gameMap]="gameMap"
+                    [ctfStartFlatIndex]="ctfStartFlatIndex"
+                    [currentPlayerHasFlag]="currentPlayerHasFlag"
+                    (cellClicked)="onCellClick($event)"
+                    (cellRightClicked)="onCellRightClick($event)"
+                />
+            }
+        </div>
+    </main>
+
+    <aside class="right-panel">
+        <div class="timer-block" [class.timer-low]="isTimerLow">
+            <span class="timer-label">{{ timerLabel }}</span>
+            <span class="timer-value">{{ timerDisplay }}</span>
+        </div>
+
+        <app-game-info-panel
+            [gridSize]="mapService.gridSize"
+            [playerCount]="gamePlayers.length"
+            [maxPlayers]="maxPlayers"
+            [activePlayerName]="matchService.activePlayerName"
+        ></app-game-info-panel>
+
+        <div class="players-section">
+           <app-match-players-list
+               [players]="gamePlayers"
+               [organizerId]="stateService.organizerId()"
+               [currentPlayerId]="stateService.currentPlayerId()"
+           />
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" [disabled]="!matchService.canEndTurn" (click)="onEndTurn()">Terminer le tour</button>
+            <button class="btn btn-secondary" [class.action-active]="matchService.actionMode" [disabled]="!matchService.canTakeAction" (click)="onAction()">Exécuter action</button>
+            <button class="btn btn-danger" [disabled]="matchService.hasAbandoned" (click)="onAbandon()">Abandonner</button>
+        </div>
+    </aside>
+</div>

@@ -1,0 +1,38 @@
+<app-navigation-page></app-navigation-page>
+<app-back-button [topNav]="true" tooltip="Revenir à l'accueil"></app-back-button>
+<app-background-image src="assets/background-image-administration.jpeg" alt="Background Game Selection" />
+<div class="content">
+        <div class="header">
+            <h1 class="page-title">
+                <span class="game-icon">🎮</span>
+                Sélection de jeu
+            </h1>
+            <p class="page-subtitle">Choisissez votre terrain de bataille</p>
+        </div>
+
+        <app-panel-background class="selection-panel" src="assets/game-selection-panel.png">
+            <app-nav-arrows [canGoPrev]="navigationService.canGoPrev()"
+                [canGoNext]="canGoNext()" (previous)="navigationService.goPrev()"
+                    (next)="goNext()"/>
+
+            <div class="games-grid">
+                @for(game of visibleGames(); track game._id) {
+                <app-case-game-selection
+                     [gameInformation]="{
+                        imageUrl : administrationService.createQualityImage(game.imageUrl),
+                        name : game.name,
+                        gridSize : game.grid.gridSize,
+                        mode : game.mode,
+                        _id : game._id ?? '',
+                        description : game.description
+                     }"
+                      (selectGame)="onSelectGame($event)"/>
+                } @empty {
+                <p class="no-games">Aucun jeu disponible.</p>
+                }
+            </div>
+        </app-panel-background>
+
+        <app-page-indicator [currentPage]="navigationService.pageIndex()+ 1 "
+            [totalPages]="totalPages()"/>
+    </div>

@@ -1,0 +1,19 @@
+<div class="room-card" [class.active]="isActive()">
+    <button
+        class="room-select-area"
+        (click)="selected.emit()"
+        matTooltip="Cliquez pour apercevoir la carte"
+        matTooltipClass="game-tooltip"
+        matTooltipPosition="above">
+        <span class="room-name">{{ room().gameName }}</span>
+        <span class="room-players">{{ room().currentPlayers }} / {{ room().maxPlayers }} joueurs</span>
+    </button>
+    <button
+        class="join-button"
+        (click)="joined.emit()"
+        matTooltip="Rejoindre cette partie directement"
+        matTooltipClass="game-tooltip"
+        matTooltipPosition="above">
+        Rejoindre
+    </button>
+</div>

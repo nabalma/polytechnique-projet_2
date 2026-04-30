@@ -1,0 +1,92 @@
+<div class="message-zone">
+    <div class="tabs">
+        <button [class.active]="activeTab === statusMessageZone.Chat" (click)="activeTab = statusMessageZone.Chat">Clavardage</button>
+        <button [class.active]="activeTab === statusMessageZone.Log" (click)="activeTab = statusMessageZone.Log">Journal</button>
+    </div>
+    <div class="tab-content">
+        @if (activeTab === statusMessageZone.Chat) {
+            <app-chat-box [gameId]="gameId()" [playerName]="playerName()" [isAbandoned]="isAbandoned()" />
+        }
+        @if (activeTab === statusMessageZone.Log) {
+            <div class="log-list">
+                @if (logEntries().length === 0) {
+                    <p class="log-empty">Aucun événement pour l'instant.</p>
+                }
+                @for (entry of logEntries(); track entry.timestamp + entry.message + (entry.roundNumber ?? '') + (entry.attackerName ?? '')) {
+                    @if (entry.combatData) {
+                        <div class="log-entry log-entry--combat">
+                            <div class="combat-header">
+                                <span class="log-time">{{ entry.timestamp }}</span>
+                                <span class="combat-round">Tour {{ entry.roundNumber }}</span>
+                            </div>
+                            <div class="combat-columns">
+                                <div class="combat-col combat-col--attack">
+                                    <div class="combat-col-title">⚔ {{ entry.attackerName }}</div>
+                                    <div class="combat-col-row">
+                                        <span class="combat-label">Base</span>
+                                        <span class="combat-value">{{ entry.combatData.attackInformation.base }}</span>
+                                    </div>
+                                    <div class="combat-col-row">
+                                        <span class="combat-label">Posture</span>
+                                        <span class="combat-value">+{{ entry.combatData.attackInformation.bonusPosture }}</span>
+                                    </div>
+                                    @if (entry.combatData.attackInformation.penalty) {
+                                        <div class="combat-col-row">
+                                            <span class="combat-label">Malus</span>
+                                            <span class="combat-value combat-value--penalty">-{{ entry.combatData.attackInformation.penalty }}</span>
+                                        </div>
+                                    }
+                                    <div class="combat-col-row">
+                                        <span class="combat-label">Dé</span>
+                                        <span class="combat-value">{{ entry.combatData.attackInformation.diceResult }}</span>
+                                    </div>
+                                    <div class="combat-col-row combat-col-row--total">
+                                        <span class="combat-label">Total</span>
+                                        <span class="combat-value">{{ entry.combatData.attackInformation.total }}</span>
+                                    </div>
+                                </div>
+                                <div class="combat-col combat-col--defense">
+                                    <div class="combat-col-title">🛡 {{ entry.defenderName }}</div>
+                                    <div class="combat-col-row">
+                                        <span class="combat-label">Base</span>
+                                        <span class="combat-value">{{ entry.combatData.defenseInformation.base }}</span>
+                                    </div>
+                                    <div class="combat-col-row">
+                                        <span class="combat-label">Posture</span>
+                                        <span class="combat-value">+{{ entry.combatData.defenseInformation.bonusPosture }}</span>
+                                    </div>
+                                    @if (entry.combatData.defenseInformation.penalty) {
+                                        <div class="combat-col-row">
+                                            <span class="combat-label">Malus</span>
+                                            <span class="combat-value combat-value--penalty">-{{ entry.combatData.defenseInformation.penalty }}</span>
+                                        </div>
+                                    }
+                                    <div class="combat-col-row">
+                                        <span class="combat-label">Dé</span>
+                                        <span class="combat-value">{{ entry.combatData.defenseInformation.diceResult }}</span>
+                                    </div>
+                                    <div class="combat-col-row combat-col-row--total">
+                                        <span class="combat-label">Total</span>
+                                        <span class="combat-value">{{ entry.combatData.defenseInformation.total }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="combat-result" [class.combat-result--damage]="entry.combatData.hasDamage" [class.combat-result--nodamage]="!entry.combatData.hasDamage">
+                                @if (entry.combatData.hasDamage) {
+                                    {{ entry.attackerName }} inflige {{ entry.combatData.differenceAttackDefense }} dégât(s)
+                                } @else {
+                                    Aucun dégât
+                                }
+                            </div>
+                        </div>
+                    } @else {
+                        <div class="log-entry">
+                            <span class="log-time">{{ entry.timestamp }}</span>
+                            <span class="log-msg">{{ entry.message }}</span>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>

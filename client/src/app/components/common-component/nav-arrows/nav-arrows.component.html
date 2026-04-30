@@ -1,0 +1,7 @@
+<button type="button" 
+class="nav-arrow nav-arrow--left" (click)="onPrev()" [disabled]="!canGoPrev()" 
+    aria-label="Précédent">‹</button>
+
+<button type="button" class="nav-arrow nav-arrow--right" 
+    (click)="onNext()" [disabled]="!canGoNext()"
+         aria-label="Suivant">›</button>

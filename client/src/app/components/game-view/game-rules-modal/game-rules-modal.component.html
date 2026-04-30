@@ -1,0 +1,9 @@
+<div class="overlay" (click)="closed.emit()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <span class="modal-title">Objectifs & Règles</span>
+            <button class="modal-close" (click)="closed.emit()">✕</button>
+        </div>
+        <app-game-rules-panel [gameMode]="gameMode" />
+    </div>
+</div>

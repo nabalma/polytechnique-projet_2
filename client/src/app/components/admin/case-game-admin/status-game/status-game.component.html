@@ -1,0 +1,11 @@
+<div class="toggle-row" (click)="setVisibility()"
+    [matTooltip]="stateVisible() ? 'Cliquez pour rendre ce jeu invisible aux joueurs' : 'Cliquez pour rendre ce jeu visible aux joueurs'"
+    matTooltipClass="game-tooltip"
+    matTooltipPosition="above">
+
+  <div class="toggle" [class.on]="stateVisible()">
+    <span class="toggle-text">{{ stateText() }}</span>
+    <div class="thumb" aria-hidden="true"></div>
+  </div>
+  
+</div>

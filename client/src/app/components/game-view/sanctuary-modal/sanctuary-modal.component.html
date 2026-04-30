@@ -1,0 +1,13 @@
+<div class="sanctuary-modal-overlay">
+    <div class="sanctuary-modal-overlay__backdrop"></div>
+    <div class="sanctuary-modal">
+        <span class="sanctuary-icon">{{ icon }}</span>
+        <h2 class="sanctuary-title">{{ title }}</h2>
+        <p class="sanctuary-description">{{ description }}</p>
+        <div class="sanctuary-actions">
+            <button class="btn btn-normal" (click)="onNormal()">Normal</button>
+            <button class="btn btn-double" (click)="onDoubleOrNothing()">Double ou Rien (50%)</button>
+            <button class="btn btn-cancel" (click)="onCancel()">Annuler</button>
+        </div>
+    </div>
+</div>

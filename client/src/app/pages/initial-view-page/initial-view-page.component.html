@@ -1,0 +1,50 @@
+@if (notificationMessage) {
+    <app-notification-popup [message]="notificationMessage" (closed)="onCloseNotification()" />
+}
+
+<div class="logo-top-left">
+    <img src="assets/logo.png" alt="Logo du jeu" />
+</div>
+
+<button class="music-toggle-btn" (click)="toggleMusic()" [title]="isMusicEnabled() ? 'Désactiver la musique' : 'Activer la musique'">
+    @if (isMusicEnabled()) {
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a6.5 6.5 0 0 1 0 9.07"></path>
+            <path d="M19.07 4.93a10.5 10.5 0 0 1 0 14.14"></path>
+        </svg>
+    } @else {
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+    }
+</button>
+
+<div class="background-container">
+    <video autoplay loop id="background-video" [muted]="!isMusicEnabled()" #backgroundVideo>
+        <source src="assets/background-video.mp4" type="video/mp4" />
+    </video>
+</div>
+
+<div class="content">
+    <app-panel-background class="panneau" src="assets/panel.png" backgroundSize="contain">
+        <div class="panneau-contenu">
+            <section class="menu-section">
+                <button class="button" routerLink="/join-game">Joindre une partie</button>
+                <button class="button" routerLink="/game-selection">Créer une partie</button>
+                <button class="button" routerLink="/administration">Administrer les Jeux</button>
+            </section>
+        </div>
+    </app-panel-background>
+</div>
+
+<footer class="footer-item">
+    <h4 class="team-name">Équipe 204</h4>
+    <p>
+        <span>Ndeye Toure Gaye Diop</span>, <span>Ousseynou Nabalma</span>, <span>Lysandra Kingne Welapenou</span>,
+        <span>Divinson Siyam Bacheu</span>, <span>Elisée Cishugi Busole</span>,
+        <span>Etonam Onesiphore Ekoue</span>
+    </p>
+</footer>

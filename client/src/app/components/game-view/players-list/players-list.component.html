@@ -1,0 +1,34 @@
+<div class="players-list-panel">
+    <h2 class="panel-header">Joueurs</h2>
+    <div class="players-container">
+        @for (player of players(); track player.id) {
+            <div class="player-item"
+                [class.active-player]="player.isActive"
+                [class.left-game]="!player.isActive && player.remainingActions === -1"
+                [class.team-red]="player.team === 'RED'"
+                [class.team-blue]="player.team === 'BLUE'">
+                <div class="player-indicator"
+                    [class.indicator-gold]="player.isActive && player.id === currentPlayerId()"
+                    [class.indicator-red]="player.isActive && player.id !== currentPlayerId() && player.team === 'RED'"
+                    [class.indicator-blue]="player.isActive && player.id !== currentPlayerId() && player.team === 'BLUE'"
+                    [class.indicator-neutral]="player.isActive && player.id !== currentPlayerId() && !player.team">
+                    {{ player.isActive ? '▶' : '' }}
+                </div>
+                <div class="player-avatar-small"
+                    [class.ring-red]="player.team === 'RED'"
+                    [class.ring-blue]="player.team === 'BLUE'">
+                    <img [src]="player.avatar" [alt]="player.name" />
+                </div>
+                <div class="player-info">
+                    <div class="player-name" [class.organizer]="player.id === organizerId()">
+                        {{ player.name }}
+                        @if (player.id === organizerId()) { <span class="organizer-badge">★</span> }
+                        @if (player.isVirtual) { <span class="virtual-badge">(JV)</span> }
+                        @if (player.hasFlag) { <span class="flag-badge" title="Possède le drapeau">🚩</span> }
+                    </div>
+                    <div class="player-wins">⚔️ {{ player.wins }} {{ player.wins <= 1 ? 'combat' : 'combats' }}</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

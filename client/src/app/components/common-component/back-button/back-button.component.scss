@@ -1,0 +1,39 @@
+.back-button {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 100;
+
+    :host.top-left & {
+        bottom: unset;
+        top: 24px;
+    }
+
+    :host.top-nav & {
+        bottom: unset;
+        top: 20px;
+        left: 72px;
+    }
+    padding: 10px 24px;
+    background: rgba(120, 100, 61, 0.93);
+    border: 2px solid #caa45c;
+    border-radius: 6px;
+    color: #f6e6c9;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+
+    &:hover {
+        background: rgba(150, 125, 75, 0.95);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), 0 0 14px rgba(202, 164, 92, 0.35);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+}

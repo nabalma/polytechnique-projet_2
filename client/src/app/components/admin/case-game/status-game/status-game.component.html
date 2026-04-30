@@ -1,0 +1,8 @@
+<div class="toggle-row" (click)="setVisibility()">
+
+  <div class="toggle" [class.on]="stateVisible()">
+    <span class="toggle-text">{{ stateText() }}</span>
+    <div class="thumb" aria-hidden="true"></div>
+  </div>
+  
+</div>

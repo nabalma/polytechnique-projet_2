@@ -1,0 +1,237 @@
+$chat-bg: rgba(20, 14, 8, 0.92);
+$border-color: rgba(202, 164, 92, 0.5);
+$gold: #ffd87a;
+$text-color: #e8d5a8;
+$meta-color: rgba(255, 216, 122, 0.6);
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    background: $chat-bg;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chat-header {
+    padding: 0.6rem 1rem;
+    background: rgba(202, 164, 92, 0.12);
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.chat-title {
+    font-weight: 700;
+    color: $gold;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+}
+
+.player-name {
+    font-size: 0.8rem;
+    color: $text-color;
+    font-style: italic;
+}
+
+.messages-container {
+    flex: 1;
+    min-height: 0;
+    overflow-y: scroll;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $border-color;
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 82%;
+    gap: 3px;
+
+    &.message-mine {
+        align-self: flex-end;
+        align-items: flex-end;
+    }
+
+    &.message-other {
+        align-self: flex-start;
+        align-items: flex-start;
+    }
+}
+
+.message-author {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #fbbf24;
+    letter-spacing: 0.02em;
+    padding: 0 4px;
+}
+
+.message-author-mine {
+    color: rgba(202, 164, 92, 0.6);
+    font-style: italic;
+}
+
+.message-bubble {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 7px 10px;
+    border-radius: 12px;
+    word-break: break-word;
+
+    .message-mine & {
+        background: rgba(202, 164, 92, 0.25);
+        border-bottom-right-radius: 3px;
+        align-items: flex-end;
+    }
+
+    .message-other & {
+        background: rgba(255, 255, 255, 0.07);
+        border-bottom-left-radius: 3px;
+        align-items: flex-start;
+    }
+}
+
+.message-content {
+    font-size: 0.84rem;
+    color: $text-color;
+    line-height: 1.4;
+}
+
+.message-time {
+    font-size: 0.62rem;
+    color: $meta-color;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.75;
+}
+
+.conversation-start {
+    text-align: center;
+    font-size: 0.65rem;
+    font-style: italic;
+    color: rgba(253, 230, 138, 0.35);
+    padding: 4px 12px;
+    margin-bottom: 4px;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 28%;
+        height: 1px;
+        background: rgba(202, 164, 92, 0.2);
+    }
+
+    &::before { left: 0; }
+    &::after { right: 0; }
+}
+
+.no-messages {
+    color: $meta-color;
+    font-size: 0.82rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.char-counter {
+    font-size: 0.72rem;
+    color: $meta-color;
+    white-space: nowrap;
+    text-align: right;
+    transition: color 0.2s;
+
+    &--warning {
+        color: #ff4444;
+        font-weight: 700;
+        text-shadow: 0 0 8px rgba(255, 68, 68, 0.7);
+    }
+}
+
+.chat-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.6rem;
+    border-top: 1px solid $border-color;
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        color: $text-color;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: $gold;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &::placeholder {
+            color: rgba(232, 213, 168, 0.35);
+        }
+    }
+
+    button {
+        background: rgba(202, 164, 92, 0.15);
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        color: $gold;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover:not(:disabled) {
+            background: rgba(202, 164, 92, 0.3);
+            border-color: $gold;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+}

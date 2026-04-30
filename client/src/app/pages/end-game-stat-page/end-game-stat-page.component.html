@@ -1,0 +1,71 @@
+<app-background-image src="assets/background-image-game.jpeg" alt="Background Statistiques fin de partie" />
+<app-back-button [topLeft]="true" [homeOnly]="true" tooltip="Revenir à l'accueil" />
+
+<div class="end-game-layout">
+    <header class="page-header">
+        <h1 class="page-title">Statistiques fin de partie</h1>
+    </header>
+
+    <div class="victory-banner"
+         [class.team-red]="endGameState.winnerTeam() === 'RED'"
+         [class.team-blue]="endGameState.winnerTeam() === 'BLUE'"
+         [class.solo-winner]="!endGameState.winnerTeam() && !!endGameState.winnerName()"
+         [class.no-winner]="!endGameState.winnerTeam() && !endGameState.winnerName()">
+
+        <div class="banner-left">
+            @if (endGameState.winnerTeam()) {
+                <p class="victory-title">
+                    Félicitations à l'équipe {{ endGameState.winnerTeam() === 'RED' ? 'Rouge' : 'Bleue' }}&nbsp;!
+                </p>
+            } @else if (endGameState.winnerName()) {
+                <p class="victory-title">Félicitations {{ endGameState.winnerName() }}&nbsp;!</p>
+            } @else {
+                <p class="victory-title">Aucun vainqueur</p>
+            }
+
+        </div>
+
+        @if (winnerTeamStats().length > 0) {
+            <div class="winner-avatars">
+                @for (player of winnerTeamStats(); track player.playerId) {
+                    <div class="avatar-card" [class.flag-carrier]="player.playerName === endGameState.winnerName() && !!endGameState.winnerTeam()">
+                        <img class="avatar-img" [src]="player.avatarMini" [alt]="player.playerName" />
+                        <span class="avatar-name">{{ player.playerName }}</span>
+                        @if (player.playerName === endGameState.winnerName() && endGameState.winnerTeam()) {
+                            <span class="flag-label">porteur du drapeau</span>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <main class="end-game-main">
+        <section class="panel-table">
+            <div class="table-panel">
+                <h2 class="table-title">Joueurs</h2>
+                <app-player-stats-table
+                    [players]="endGameState.stats()?.playerStats ?? []"
+                    [winnerId]="endGameState.winnerId()"
+                    [winnerTeamPlayerNames]="endGameState.winnerTeamPlayers()"
+                    [winnerTeam]="endGameState.winnerTeam()"
+                />
+            </div>
+        </section>
+
+        <aside class="panel-right">
+            <div class="global-stats-panel">
+                <h2 class="table-title">Statistiques globales</h2>
+                <app-global-stats [stats]="endGameState.stats()" />
+            </div>
+            <div class="messages-panel">
+                <app-message-zone
+                    [gameId]="endGameState.gameId()"
+                    [playerName]="endGameState.playerName()"
+                    [isAbandoned]="currentPlayerIsAbandoned"
+                    [logEntries]="endGameState.logEntries()"
+                />
+            </div>
+        </aside>
+    </main>
+</div>

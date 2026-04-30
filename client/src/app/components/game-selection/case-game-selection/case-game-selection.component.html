@@ -1,0 +1,25 @@
+
+@if(this.gameInformation()){
+<div class="case-card" (click)="onCardClick()">
+    <div class="card-top">
+        <app-game-image [imageUrl]="this.gameInformation().imageUrl" class="image-cover" />
+    </div>
+
+    <div class="card-bottom">
+        <div class="header-group">
+            <h3 class="game-title">{{ this.gameInformation().name }}</h3>
+
+            <div class="badges-row">
+                <span class="badge"> <i class="icon-grid"></i> {{ this.gameInformation().gridSize }}x{{this.gameInformation().gridSize }} </span>
+                <span class="badge mode-badge">
+                    {{ this.gameInformation().mode }}
+                </span>
+            </div>
+        </div>
+
+        <div class="description-text">
+            <app-game-description [description]="this.gameInformation().description"/>
+        </div>
+    </div>
+</div>
+}

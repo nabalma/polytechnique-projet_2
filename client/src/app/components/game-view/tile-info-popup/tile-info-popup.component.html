@@ -1,0 +1,29 @@
+<div class="tile-popup" [style.left.px]="x + 14" [style.top.px]="y + 14">
+    <button class="popup-close" (click)="closed.emit()">✕</button>
+    <div class="popup-section tile-section">
+        <span class="popup-label">Tuile</span>
+        <span class="popup-title">{{ tileName }}</span>
+        <span class="popup-detail">{{ tileMoveCost }}</span>
+        <span class="popup-detail">{{ tileDescription }}</span>
+    </div>
+
+    @if (objectName) {
+        <div class="popup-divider"></div>
+        <div class="popup-section">
+            <span class="popup-label">Objet</span>
+            <span class="popup-title">{{ objectName }}</span>
+            <span class="popup-detail">{{ objectDescription }}</span>
+        </div>
+    }
+
+    @if (player) {
+        <div class="popup-divider"></div>
+        <div class="popup-section player-section">
+            <span class="popup-label">Joueur</span>
+            <div class="player-row">
+                <img class="player-avatar" [src]="player.avatarMini" [alt]="player.name" />
+                <span class="player-name">{{ player.name }}</span>
+            </div>
+        </div>
+    }
+</div>

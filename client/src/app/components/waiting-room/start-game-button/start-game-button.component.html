@@ -1,0 +1,17 @@
+@if (isOrganizer()) {
+    <div class="start-wrapper">
+        <button
+            class="start-btn"
+            [disabled]="!canStart"
+            (click)="onStart()"
+        >
+            <span class="btn-icon">⚔️</span>
+            <span class="btn-content">
+                <span class="btn-label">DÉMARRER LA PARTIE</span>
+                @if (!canStart) {
+                    <span class="btn-sub">{{ tooltip }}</span>
+                }
+            </span>
+        </button>
+    </div>
+}

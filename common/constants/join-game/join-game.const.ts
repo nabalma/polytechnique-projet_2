@@ -1,0 +1,1 @@
+export const TIMEOUT_UPDATE_INFORMATION = 5000;

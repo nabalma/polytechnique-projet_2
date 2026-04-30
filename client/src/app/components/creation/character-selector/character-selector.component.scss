@@ -1,0 +1,80 @@
+.character-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.35rem;
+    margin: 0 0 0.4rem;
+}
+
+.character {
+    position: relative;
+
+    border: 3px solid rgba(202, 164, 92, 0.25);
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 999px;
+    width: 70px;
+    height: 70px;
+    padding: 2px;
+    cursor: pointer;
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        border-color 0.12s ease;
+
+    &:hover {
+        transform: scale(1.05);
+        border-color: rgba(202, 164, 92, 0.5);
+    }
+
+    &.selected {
+        border-color: #fd9c00;
+        box-shadow:
+            0 0 20px rgb(255, 170, 0),
+            inset 0 0 14px rgba(255, 204, 0, 1);
+        transform: scale(1.08);
+    }
+
+    &.taken {
+        opacity: 0.4;
+        cursor: not-allowed;
+        filter: grayscale(80%);
+
+        &:hover {
+            transform: none;
+            border-color: rgba(202, 164, 92, 0.25);
+        }
+
+        &::after {
+            content: 'Avatar déjà pris';
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 4, 0, 0.97);
+            color: #c47f00;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+            padding: 5px 11px;
+            border-radius: 5px;
+            border: 1.5px solid rgba(244, 178, 56, 0.85);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            z-index: 10;
+        }
+
+        &:hover::after {
+            opacity: 1;
+        }
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 999px;
+        display: block;
+    }
+}

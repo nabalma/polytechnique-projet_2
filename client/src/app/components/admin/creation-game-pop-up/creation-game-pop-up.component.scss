@@ -1,0 +1,78 @@
+
+.pop-up-game-creation {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  width: 500px;
+  aspect-ratio: 16/8;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.slot-choixmodegame {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0,8px;
+  color: #ffffff;
+}
+
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.slot-action-boutons {
+  display: flex;
+  margin-top: auto; 
+  justify-content: center;
+  gap: 250px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+#creer-game-button {
+  background-color: #4CAF50; 
+  color: white;
+}
+
+#annuler-button {
+  background-color: rgba(230, 22, 22, 0.825);
+  color: white;
+  border: 1px solid rgb(228, 23, 23);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+

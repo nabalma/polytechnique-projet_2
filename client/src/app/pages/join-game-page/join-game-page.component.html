@@ -1,0 +1,41 @@
+<app-background-image src="assets/background-image-waiting-view.png" />
+<app-back-button [topLeft]="true" tooltip="Revenir à l'accueil"></app-back-button>
+<div class="rooms-layout">
+    <app-panel-background class="list-panel" src="assets/panel-list-join-game.png" backgroundSize="100% 100%">
+        <div class="panel-header">
+            <h2 class="panel-title">Rejoindre une partie</h2>
+        </div>
+        <div class="rooms-list">
+            @if (joinGameService.rooms().length === 0) {
+            <p class="empty-message">Aucune partie disponible pour l'instant.</p>
+            }
+            @for (room of joinGameService.rooms(); track room.roomId) {
+            <app-room-card
+                [room]="room"
+                [isActive]="joinGameService.selectedRoom?.roomId === room.roomId"
+                (selected)="selectRoom(room)"
+                (joined)="join(room)"
+            />
+            }
+        </div>
+        <div class="panel-footer"></div>
+    </app-panel-background>
+
+    <div class="preview-area">
+        @if (joinGameService.selectedRoom) {
+        <app-room-preview [room]="joinGameService.selectedRoom" />
+        } @else {
+        <app-panel-background class="frame-empty" src="assets/panel-preview-join-game.png" backgroundSize="100% 100%">
+            <p class="no-selection">
+                @if (joinGameService.rooms().length === 0) {
+                    Aucune partie disponible.<br />Créez une partie pour commencer.
+                    <br /><br />
+                    <button class="btn-go-selection" (click)="navigateToGameSelection()">Aller à la sélection de jeu</button>
+                } @else {
+                    Sélectionnez une partie<br />pour apercevoir la carte.
+                }
+            </p>
+        </app-panel-background>
+        }
+    </div>
+</div>

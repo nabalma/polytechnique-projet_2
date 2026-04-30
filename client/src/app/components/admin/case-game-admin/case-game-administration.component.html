@@ -1,0 +1,26 @@
+@if(this.gameInformation()){
+<div class="case-card">
+    <div class="slot slot-image">
+        <app-game-image [imageUrl]="this.gameInformation().imageUrl" />
+        <div class="speech-bubble">
+            <app-game-description [description]="this.gameInformation().description"/>
+        </div>
+    </div>
+
+    <div class="slot slot-info">
+        <app-textual-information [name]="this.gameInformation().name" [size]="this.gameInformation().gridSize" [mode]="this.gameInformation().mode"
+            [createdAt]="this.gameInformation().createdAt" [updatedAt]="this.gameInformation().updateAt"/>
+    </div>
+
+    <div class="slot slot-status" (click)="$event.stopPropagation()">
+        <app-status-game [isVisible]="this.gameInformation().isVisible"
+         [gameId]="this.gameInformation()._id" />
+    </div>
+
+    <div class="slot slot-actions">
+        <button type="button" class="btn btn-edit" (click)="this.onEditClick()">Éditer</button>
+        <button type="button" class="btn btn-delete" (click)="onDeleteClick($event)">Supprimer</button>
+    </div>
+
+</div>
+}

@@ -1,0 +1,13 @@
+<div class="textual-information-container">
+    <p id="game-name">{{ name() }}</p>
+    <p id="game-size"><span class="info-label">Taille:</span> {{ size() }}</p>
+    <p id="game-mode"><span class="info-label">Mode:</span> {{ mode() }}</p>
+    @if (createdAt()|| updatedAt()) {
+    <p id="last-modified-date-game">
+        <span class="info-label">Dernière modification :</span><br />
+        {{ updatedAt() || createdAt() }}
+    </p>
+    }
+
+
+</div>

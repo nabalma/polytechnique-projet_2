@@ -1,0 +1,17 @@
+.page-indicator {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #ffd87a;
+    text-shadow: 0 0 10px rgba(255, 216, 122, 0.6);
+    padding: 0.7rem 2.5rem;
+    background: rgba(30, 20, 10, 0.785);
+    border-radius: 10px;
+    border: 2px solid rgba(202, 164, 92, 0.6);
+    z-index: 20;
+
+    
+}

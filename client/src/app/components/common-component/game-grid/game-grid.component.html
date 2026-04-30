@@ -1,0 +1,28 @@
+<div
+    class="grid-container"
+    [style.--grid-size]="gridSize"
+    [style.--cell-size]="cellSize"
+>
+    @for(cell of cells; track $index){
+        <div
+            class="cell"
+            #cell
+            [style.--grid-style]="gameMap().gridSize "
+            [class.selected]="isSelected($index)"
+            [class.reachable]="matchService.isMyTurn() && !matchService.actionMode && isReachable($index)"
+            [class.action-target--player]="actionTargets().get($index) === targetType.Player"
+            [class.action-target--door]="actionTargets().get($index) === targetType.Door"
+            [class.action-target--sanctuary]="actionTargets().get($index) === targetType.Sanctuary"
+            [class.ctf-start-marker]="ctfStartFlatIndex() === $index && !currentPlayerHasFlag()"
+            [class.ctf-start-highlight]="ctfStartFlatIndex() === $index && currentPlayerHasFlag()">
+            <app-cell
+                [cellInfo]="cell"
+                [playerId]="playersByCell().get($index) ?? null"
+                (click)="clicked($index)"
+                (contextmenu)="rightClicked($event, $index)">
+            </app-cell>
+        </div>
+        
+    }
+</div>
+

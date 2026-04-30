@@ -1,0 +1,14 @@
+.image-container {
+    width: 200px;
+    height: 200px;
+    display: flex;
+
+    margin-left: 100px;
+}
+
+#image-game {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+}

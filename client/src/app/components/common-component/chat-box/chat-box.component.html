@@ -1,0 +1,52 @@
+<div class="chat-box">
+    <div class="chat-header">
+        <span class="chat-title">{{ title() }}</span>
+        @if (playerName()) {
+            <span class="player-name">{{ playerName() }}</span>
+        }
+    </div>
+
+    <div class="messages-container" #messagesContainer>
+        <div class="conversation-start">Début de la conversation</div>
+        @if (messages.length === 0) {
+            <div class="no-messages">Aucun message pour l'instant.</div>
+        }
+        @for (msg of messages; track msg.timestamp) {
+            <div class="message" [class.message-mine]="msg.author === playerName()" [class.message-other]="msg.author !== playerName()">
+                @if (msg.author === playerName()) {
+                    <span class="message-author message-author-mine">Vous</span>
+                } @else {
+                    <span class="message-author">{{ msg.author }}</span>
+                }
+                <div class="message-bubble">
+                    <span class="message-content">{{ msg.content }}</span>
+                    <span class="message-time">{{ msg.timestamp }}</span>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="chat-input">
+        <div class="chat-input-row">
+            <input
+                id="chat-message-input"
+                name="chat-message"
+                type="text"
+                [(ngModel)]="messageInput"
+                [maxlength]="maxLength"
+                [disabled]="isAbandoned()"
+                [placeholder]="isAbandoned() ? 'Vous avez abandonné la partie' : 'Écrire un message...'"
+                (keydown.enter)="sendMessage()"
+                aria-label="Message"
+                (focus)="onInputFocus()"
+                (blur)="onLostFocus()"
+            />
+            <button type="button" (click)="sendMessage()" [disabled]="isAbandoned() || !messageInput.trim()">
+                Envoyer
+            </button>
+        </div>
+        <span class="char-counter" [class.char-counter--warning]="maxLength - messageInput.length <= 20">
+            {{ maxLength - messageInput.length }} caractère(s) max
+        </span>
+    </div>
+</div>

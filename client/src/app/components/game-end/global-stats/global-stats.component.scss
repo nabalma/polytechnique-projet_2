@@ -1,0 +1,52 @@
+.stats-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.stat-pill {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.38rem 0;
+    border-bottom: 1px solid rgba(202, 164, 92, 0.15);
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &.stat-pill-ctf {
+        .pill-label { color: rgba(251, 191, 36, 0.8); }
+        .pill-value { color: #fbbf24; }
+    }
+}
+
+.pill-separator {
+    display: none;
+}
+
+.pill-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(232, 213, 168, 0.6);
+    white-space: nowrap;
+}
+
+.pill-value {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: #fbbf24;
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.35);
+    font-variant-numeric: tabular-nums;
+}
+
+.stats-empty {
+    font-size: 0.72rem;
+    color: rgba(232, 213, 168, 0.5);
+    font-style: italic;
+    margin: 0;
+    text-align: center;
+}

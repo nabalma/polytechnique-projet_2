@@ -1,0 +1,243 @@
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+:host {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    animation: pageFadeIn 0.35s ease-out both;
+}
+
+.end-game-layout {
+    position: absolute;
+    top: 64px;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(94vw, 1300px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page-header {
+    flex-shrink: 0;
+    padding: 0.5rem 1.2rem;
+    background: rgba(22, 15, 9, 0.92);
+    border: 2px solid rgba(202, 164, 92, 0.65);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    text-align: center;
+}
+
+.page-title {
+    margin: 0;
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #ffe566;
+    text-shadow:
+        0 0 20px rgba(255, 215, 0, 0.6),
+        0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.victory-banner {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 14px;
+    border: 2px solid rgba(202, 164, 92, 0.5);
+    background: rgba(22, 15, 9, 0.94);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+
+    &.team-red {
+        border-color: rgba(248, 113, 113, 0.7);
+        background: linear-gradient(135deg, rgba(22, 15, 9, 0.96) 60%, rgba(248, 113, 113, 0.08));
+    }
+
+    &.team-blue {
+        border-color: rgba(96, 165, 250, 0.7);
+        background: linear-gradient(135deg, rgba(22, 15, 9, 0.96) 60%, rgba(96, 165, 250, 0.08));
+    }
+
+    &.solo-winner {
+        border-color: rgba(251, 191, 36, 0.65);
+        background: linear-gradient(135deg, rgba(22, 15, 9, 0.96) 60%, rgba(251, 191, 36, 0.07));
+    }
+
+    &.no-winner {
+        border-color: rgba(248, 113, 113, 0.3);
+    }
+}
+
+.banner-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.victory-title {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.3vw, 1.2rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: #ffe566;
+    text-shadow:
+        0 0 24px rgba(255, 215, 0, 0.5),
+        0 2px 8px rgba(0, 0, 0, 0.9);
+
+    .team-red & { color: #fca5a5; text-shadow: 0 0 20px rgba(248, 113, 113, 0.5), 0 2px 8px rgba(0,0,0,0.9); }
+    .team-blue & { color: #93c5fd; text-shadow: 0 0 20px rgba(96, 165, 250, 0.5), 0 2px 8px rgba(0,0,0,0.9); }
+    .no-winner & { color: rgba(232, 213, 168, 0.6); text-shadow: none; }
+}
+
+
+.winner-avatars {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+}
+
+.avatar-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+
+    &.flag-carrier .avatar-img {
+        border-color: rgba(251, 191, 36, 0.8);
+        box-shadow: 0 0 14px rgba(251, 191, 36, 0.45);
+    }
+}
+
+.avatar-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid rgba(202, 164, 92, 0.5);
+    object-fit: cover;
+
+    .team-red & { border-color: rgba(248, 113, 113, 0.6); }
+    .team-blue & { border-color: rgba(96, 165, 250, 0.6); }
+}
+
+.avatar-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: rgba(232, 213, 168, 0.9);
+    text-align: center;
+    max-width: 58px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.flag-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fbbf24;
+    opacity: 0.85;
+}
+
+.end-game-main {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 290px;
+    grid-template-rows: 1fr;
+    gap: 12px;
+    align-items: stretch;
+}
+
+.panel-table {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.table-panel {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(22, 15, 9, 0.96);
+    border: 3px solid rgba(202, 164, 92, 0.75);
+    border-radius: 14px;
+    padding: clamp(10px, 1.2vh, 16px) 1.2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+.table-title {
+    margin: 0 0 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #ffd87a;
+    text-shadow: 0 0 10px rgba(255, 216, 122, 0.4);
+    border-bottom: 1px solid rgba(202, 164, 92, 0.35);
+    padding-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+.panel-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+}
+
+.global-stats-panel {
+    flex: 0 0 auto;
+    max-height: 42%;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(202, 164, 92, 0.5) rgba(0, 0, 0, 0.3);
+    background: rgba(22, 15, 9, 0.96);
+    border: 2px solid rgba(202, 164, 92, 0.55);
+    border-radius: 14px;
+    padding: clamp(8px, 1vh, 14px) 1.2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(202, 164, 92, 0.5);
+        border-radius: 3px;
+    }
+}
+
+.messages-panel {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    app-message-zone {
+        flex: 1;
+        min-height: 0;
+    }
+}

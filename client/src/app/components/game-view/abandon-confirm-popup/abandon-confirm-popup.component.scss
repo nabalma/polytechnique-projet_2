@@ -1,0 +1,86 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 36px 24px;
+    width: 400px;
+    max-width: 95vw;
+    background: rgba(20, 14, 6, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 2px solid rgba(202, 164, 92, 0.6);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(202, 164, 92, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fef3c7;
+}
+
+.popup-icon {
+    font-size: 2.4rem;
+    line-height: 1;
+}
+
+.popup-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #ffd87a;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.popup-message {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    color: #fef3c7;
+    line-height: 1.5;
+}
+
+.popup-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+button {
+    padding: 10px 28px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.12);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.btn-cancel {
+    background-color: rgba(80, 80, 80, 0.85);
+    color: #fff;
+}
+
+.btn-confirm {
+    background-color: rgba(180, 50, 50, 0.85);
+    color: #fff;
+}

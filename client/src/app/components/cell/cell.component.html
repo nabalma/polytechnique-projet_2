@@ -1,0 +1,28 @@
+<div class="cell" [class.cell--reachable]="isReachable()">
+    <div class="tuile">
+        <img [src]="cellInfo.tile.imageSrc"/>
+    </div>
+    <div class="objectContainer">
+    @if(cellInfo.objects?.imageSrc){
+        <div class="object" [class.sanctuary]="isSanctuary" [class.sanctuary--inactive]="isSanctuaryInactive">
+            <img [src]="cellInfo.objects?.imageSrc"/>
+        </div>
+    }
+     </div>
+     @if(playerId){
+        <div class="avatarContainer"
+            [class.team-red]="playerTeam === 'RED'"
+            [class.team-blue]="playerTeam === 'BLUE'"
+            [class.my-turn]="isCurrentPlayer && isActivePlayer">
+            <img [src]="avatar"/>
+            @if(isActivePlayer){
+                <div class="activeArrow"
+                    [class.activeArrow--red]="playerTeam === 'RED'"
+                    [class.activeArrow--blue]="playerTeam === 'BLUE'">▼</div>
+            }
+            @if(playerHasFlag){
+                <div class="flag-badge">🚩</div>
+            }
+        </div>
+     }
+<div>

@@ -1,0 +1,23 @@
+<div class="overlay">
+    <div class="popup" [class.victory]="isCurrentPlayerWinner && !isCancelled"
+                       [class.defeat]="!isCurrentPlayerWinner && !isCancelled"
+                       [class.cancelled]="isCancelled">
+        <div class="popup-icon">{{ icon }}</div>
+        <h2 class="popup-title">{{ title }}</h2>
+
+        @if (isCancelled) {
+            <p class="popup-message">
+                Une équipe n'a plus de joueurs actifs suite à des abandons.<br>
+                La partie est déclarée annulée.
+            </p>
+        } @else if (isCurrentPlayerWinner) {
+            <p class="popup-message victory-text">{{ victoryMessage }}</p>
+        } @else {
+            <p class="popup-message defeat-text">{{ defeatMessage }}</p>
+        }
+
+        <p class="countdown">
+            Redirection vers {{ isCancelled ? "l'accueil" : 'les statistiques' }} dans {{ countdown }} seconde{{ countdown > 1 ? 's' : '' }}…
+        </p>
+    </div>
+</div>

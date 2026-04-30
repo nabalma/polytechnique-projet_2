@@ -1,0 +1,47 @@
+.textual-information-container {
+    font-family: 'Georgia', serif;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #game-name {
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.8px;
+        margin-bottom: 6px;
+        color: #ffffff;
+        text-shadow:
+            0 0 2px #000,
+            0 0 4px #000,
+            1px 1px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            0 2px 8px rgba(0, 0, 0, 1),
+            0 0 16px rgba(255, 210, 80, 0.6);
+    }
+
+    #last-modified-date-game {
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.1px;
+    }
+
+    .info-label {
+        color: rgba(255, 200, 100, 0.7);
+        font-size: 11px;
+    }
+}

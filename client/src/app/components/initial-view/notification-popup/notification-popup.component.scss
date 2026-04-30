@@ -1,0 +1,55 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 30px 30px 20px;
+    width: 420px;
+    max-width: 95vw;
+    background-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+}
+
+.popup-message {
+    font-size: 1.05rem;
+    font-weight: 350;
+    text-align: center;
+    margin: 0;
+}
+
+button {
+    padding: 10px 40px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    background-color: rgba(130, 130, 130, 0.825);
+    color: white;
+    transition: transform 0.16s, filter 0.16s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+button:active {
+    transform: translateY(0);
+}

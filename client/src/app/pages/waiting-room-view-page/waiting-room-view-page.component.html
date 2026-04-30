@@ -1,0 +1,77 @@
+<app-background-image src="assets/background-image-waiting-view.png" />
+<button class="button-leave-room" (click)="onLeave()" matTooltip="Quitter la salle d'attente et revenir à l'accueil" matTooltipClass="game-tooltip" matTooltipPosition="below">Quitter</button>
+<button class="button-rules" (click)="showRulesModal = true" matTooltip="Afficher les règles et objectifs du mode de jeu" matTooltipClass="game-tooltip" matTooltipPosition="below">Règles</button>
+
+<div class="waiting-room-panel">
+    <div class="waiting-room-header">
+        <div class="waiting-room-title-block">
+            <h2 class="waiting-room-title">En attente d'autres joueurs</h2>
+            <p class="waiting-room-subtitle">Salle : {{ roomId || '—' }}</p>
+        </div>
+        @if (currentPlayerId === organizerId) {
+        <div class="virtual-player-wrapper">
+            <button
+                class="button-virtual-player"
+                [class.open]="isVirtualPlayerChooserOpen"
+                [disabled]="isRoomFull"
+                (click)="onCreateVirtualPlayer()"
+                matTooltip="Ajouter un joueur contrôlé par l'ordinateur"
+                matTooltipClass="game-tooltip"
+                matTooltipPosition="above">
+                + Joueur virtuel
+                <span class="chevron">&#9662;</span>
+            </button>
+
+            @if (isVirtualPlayerChooserOpen) {
+            <div class="virtual-player-chooser">
+                <button class="chooser-option" (click)="onSelectAggressiveVirtualPlayer()" matTooltip="Joueur virtuel qui privilégie l'attaque" matTooltipClass="game-tooltip" matTooltipPosition="right">
+                    <span class="option-icon">&#9876;</span>
+                    <span class="option-label">Agressif</span>
+                </button>
+                <button class="chooser-option" (click)="onSelectDefensiveVirtualPlayer()" matTooltip="Joueur virtuel qui privilégie la défense" matTooltipClass="game-tooltip" matTooltipPosition="right">
+                    <span class="option-icon">&#9737;</span>
+                    <span class="option-label">Défensif</span>
+                </button>
+            </div>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="waiting-room-section">
+        <div class="section-head">
+            <span class="section-label">👥 {{ players.length }} joueurs sur {{ maxPlayers }}</span>
+            <span class="section-lock" [class.section-lock-open]="!isLocked" [class.section-lock-locked]="isLocked">
+                {{ isLocked ? '🔒 Salle verrouillée' : '🔓 Salle ouverte' }}
+            </span>
+        </div>
+        <div class="players-wrapper">
+            <app-waiting-player-list
+                (kickPlayer)="onKickPlayer($event)"
+            />
+        </div>
+    </div>
+
+    <div class="waiting-room-chat">
+        <div class="chat-inner">
+            <app-chat-box [playerName]="playerName" [gameId]="roomId" [isAbandoned]="isAbandoned" />
+        </div>
+    </div>
+
+    <div class="waiting-room-footer">
+        @if (currentPlayerId === organizerId) {
+        <button class="button-start" [disabled]="!canStart" (click)="onStartGame()" matTooltip="Cliquez pour lancer la partie — tous les joueurs seront notifiés" matTooltipClass="game-tooltip" matTooltipPosition="above">LANCER LA PARTIE</button>
+        @if (ctfOddPlayerWarning) {
+        <p class="ctf-warning">{{ ctfOddPlayerMessage }}</p>
+        } } @else {
+        <p class="waiting-message">En attente que l'organisateur lance la partie…</p>
+        }
+    </div>
+</div>
+
+@if (showRulesModal) {
+    <app-game-rules-modal
+        [gameMode]="gameMode"
+        (closed)="showRulesModal = false"
+    />
+}

@@ -1,0 +1,16 @@
+<div class="rules-panel">
+    <div class="rules-header">
+        <span class="rules-mode-badge">{{ modeLabel }}</span>
+    </div>
+    <ul class="rules-list">
+        @for (rule of rules; track rule.title) {
+            <li class="rule-item">
+                <span class="rule-icon">{{ rule.icon }}</span>
+                <div class="rule-content">
+                    <span class="rule-title">{{ rule.title }}</span>
+                    <span class="rule-description">{{ rule.description }}</span>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

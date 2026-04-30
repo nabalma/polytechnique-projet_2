@@ -1,0 +1,47 @@
+<section class="game-info">
+    <h2 class="game-info__title">Informations du jeu</h2>
+
+    <div class="form-group">
+        <label for="gameName">Nom du jeu</label>
+        <input id="gameName" type="text" placeholder="Nom du jeu" [value]="name()" [attr.maxlength]="nameMaxLength" (input)="onNameInput($event)" />
+        <span class="name-char-counter" [class.name-char-counter-warning]="nameMaxLength - name().length <= 3">{{ nameMaxLength - name().length }} caractère(s) max</span>
+       
+        @if(saveAttempted() && name().trim().length === 0)
+        {
+            <span class="error-message">Ce Champ est requis.</span>
+        }
+
+    </div>
+
+    <div class="form-group">
+        <label for="gameDescription">Description</label>
+        <textarea
+            id="gameDescription"
+            #gameDescriptionTextArea
+            rows="4"
+            placeholder="Description du jeu"
+            [value]="description()"
+            [attr.maxlength]="descriptionMaxLength"
+            (input)="onDescriptionInput($event)"
+        ></textarea>
+        <span class="name-char-counter" [class.name-char-counter-warning]="descriptionMaxLength - description().length <= 3">{{ descriptionMaxLength - description().length }} caractère(s) max</span>
+
+        @if(saveAttempted() && description().trim().length === 0)
+        {
+            <span class="error-message">Ce Champ est requis.</span>
+        }
+
+    </div>
+
+    <div class="game-info__meta">
+        <div class="meta-item">
+            <span class="meta-label">Mode</span>
+            <span class="meta-value">{{ mode() }}</span>
+        </div>
+
+        <div class="meta-item">
+            <span class="meta-label">Taille</span>
+            <span class="meta-value">{{ gridSize() }}</span>
+        </div>
+    </div>
+</section>

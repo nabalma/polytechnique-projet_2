@@ -1,0 +1,87 @@
+<div class="attrs">
+    <div class="section-title">
+        <span class="title-text">Attribuez le bonus +2 à un attribut</span>
+    </div>
+
+    <div class="attr-grid">
+        <button type="button" class="attr-card bonus-card" 
+            [ngClass]="{ selected: bonus() === bonusAttribute.Life}"
+                 (click)="setBonus(bonusAttribute.Life)">
+            <div class="card-top">
+                <span class="big-icon">❤️</span>
+                <div class="card-info">
+                    <span class="attr-name">Vie</span>
+                    <span class="attr-description">Points de vie</span>
+                </div>
+                <span class="bonus-big">+2</span>
+            </div>
+            <div class="card-bottom">
+                <span class="value-display"
+                    >Valeur: <strong>{{ value(bonusAttribute.Life) }}</strong></span
+                >
+            </div>
+        </button>
+
+        <button type="button" class="attr-card bonus-card" [ngClass]="{ selected: bonus() === bonusAttribute.Speed}"
+                 (click)="setBonus(bonusAttribute.Speed)">
+            <div class="card-top">
+                <span class="big-icon">⚡</span>
+                <div class="card-info">
+                    <span class="attr-name">Rapidité</span>
+                    <span class="attr-description">Ordre et mouvement</span>
+                </div>
+                <span class="bonus-big">+2</span>
+            </div>
+            <div class="card-bottom">
+                <span class="value-display"
+                    >Valeur: <strong>{{ value(bonusAttribute.Speed) }}</strong></span
+                >
+            </div>
+        </button>
+    </div>
+
+    <div class="section-title dice-title">
+        <span class="title-text">Assignez le dé D6</span>
+        <span class="title-hint">(l'autre attribut aura le D4)</span>
+    </div>
+
+    <div class="attr-grid">
+        <button type="button" class="attr-card dice-card" 
+            [ngClass]="{ selected: d6AssignedTo() === assignationDice.Attack}" (click)="setD6(assignationDice.Attack)">
+           
+            <div class="card-top">
+                <span class="big-icon">⚔️</span>
+                <div class="card-info">
+                    <span class="attr-name">Attaque</span>
+                    <span class="attr-description">Force d'attaque</span>
+                </div>
+                <span class="dice-big" [class.is-d6]="d6AssignedTo() === assignationDice.Attack">
+                    {{ diceFor(assignationDice.Attack) }}
+                </span>
+            </div>
+            <div class="card-bottom">
+                <span class="value-display"
+                    >Valeur: <strong>{{ value(assignationDice.Attack) }}</strong></span
+                >
+            </div>
+        </button>
+
+        <button type="button" class="attr-card dice-card" [ngClass]="{ selected: d6AssignedTo() === assignationDice.Defense}" (click)="setD6(assignationDice.Defense)">
+            <div class="card-top">
+                <span class="big-icon">🛡️</span>
+                <div class="card-info">
+                    <span class="attr-name">Défense</span>
+                    <span class="attr-description">Bloquer attaques</span>
+                </div>
+                <span class="dice-big" [class.is-d6]=" d6AssignedTo() === assignationDice.Defense">
+                    {{ diceFor(assignationDice.Defense) }}
+                </span>
+            </div>
+            <div class="card-bottom">
+                <span class="value-display"
+                    >Valeur: <strong>{{ value(assignationDice.Defense) }}</strong></span
+                >
+            </div>
+        </button>
+    </div>
+</div>

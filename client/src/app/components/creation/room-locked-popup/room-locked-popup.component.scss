@@ -1,0 +1,77 @@
+.locked-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.locked-dialog {
+    background: rgba(22, 15, 9, 0.98);
+    border: 2px solid rgba(202, 164, 92, 0.75);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.85);
+}
+
+.locked-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #ffd87a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.locked-message {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(232, 213, 168, 0.8);
+    line-height: 1.5;
+}
+
+.locked-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.locked-button-retry,
+.locked-button-leave {
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+}
+
+.locked-button-retry {
+    background: rgba(120, 100, 61, 0.93);
+    border: 2px solid #caa45c;
+    color: #f6e6c9;
+
+    &:hover {
+        background: rgba(150, 125, 75, 0.95);
+    }
+}
+
+.locked-button-leave {
+    background: transparent;
+    border: 2px solid rgba(232, 213, 168, 0.4);
+    color: rgba(232, 213, 168, 0.7);
+
+    &:hover {
+        border-color: rgba(232, 213, 168, 0.8);
+        color: #e8d5a8;
+    }
+}

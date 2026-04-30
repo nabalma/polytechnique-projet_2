@@ -1,0 +1,7 @@
+<div class="center-button-controler">
+    <button id="save-button" class="ctrl-btn ctrl-btn--primary" 
+        (click)="this.saveClick()"
+        [disabled]="saveRestartService.isSaving()"> Enregistrer</button>
+    <button id="restart-button" class="ctrl-btn ctrl-btn--secondary" 
+        (click)="this.restartClick()" > Réinitialiser</button>
+</div>

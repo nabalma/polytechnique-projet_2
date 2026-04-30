@@ -1,0 +1,87 @@
+.tile-popup {
+    position: fixed;
+    z-index: 100;
+    background: rgba(18, 10, 4, 0.97);
+    border: 2px solid rgba(202, 164, 92, 0.75);
+    border-radius: 10px;
+    padding: 0.6rem 0.85rem 0.6rem 0.85rem;
+    padding-top: 1.4rem;
+    min-width: 180px;
+    max-width: 260px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 12px rgba(202, 164, 92, 0.15);
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.popup-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.popup-close {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.4rem;
+    background: none;
+    border: none;
+    color: rgba(202, 164, 92, 0.6);
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 0 0.2rem;
+    line-height: 1;
+    &:hover {
+        color: #ffd87a;
+    }
+}
+
+.popup-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(202, 164, 92, 0.65);
+}
+
+.popup-title {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #ffd87a;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.popup-detail {
+    font-size: 0.72rem;
+    color: rgba(253, 230, 138, 0.8);
+    line-height: 1.4;
+}
+
+.popup-divider {
+    height: 1px;
+    background: rgba(202, 164, 92, 0.25);
+    margin: 0.1rem 0;
+}
+
+.player-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.1rem;
+}
+
+.player-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(202, 164, 92, 0.7);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.player-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #ffd87a;
+}

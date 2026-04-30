@@ -1,0 +1,53 @@
+.game-info-panel {
+    background: rgba(30, 20, 10, 0.82);
+    border: 3px solid rgba(202, 164, 92, 0.75);
+    border-radius: 12px;
+    padding: 10px 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.panel-header {
+    margin: 0 0 8px 0;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #ffd87a;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    border-bottom: 2px solid rgba(202, 164, 92, 0.6);
+    padding-bottom: 5px;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgba(253, 230, 138, 0.85);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.info-value {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #fef3c7;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.active-player {
+    color: #fbbf24;
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.9),
+        0 0 12px rgba(251, 191, 36, 0.6);
+}

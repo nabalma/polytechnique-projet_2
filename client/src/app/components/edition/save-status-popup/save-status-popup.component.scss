@@ -1,0 +1,160 @@
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-overlay--loading {
+    pointer-events: none;
+}
+
+.save-status-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 35px 40px;
+    min-width: 380px;
+    max-width: 480px;
+    background-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 40px rgba(6, 0, 0, 0.45);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+}
+
+.status-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+}
+
+/* ── Spinner ─────────────────────────────────────────── */
+.spinner {
+    width: 52px;
+    height: 52px;
+    border: 5px solid rgba(255, 255, 255, 0.25);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Success icon ─────────────────────────────────────── */
+.success-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    animation: pop-in 0.3s ease-out;
+}
+
+@keyframes pop-in {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+/* ── No changes icon ──────────────────────────────────── */
+.no-changes-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #2196F3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    animation: pop-in 0.3s ease-out;
+}
+
+/* ── Messages ─────────────────────────────────────────── */
+.status-message {
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+}
+
+.error-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    color: #ff6b6b;
+    margin: 0;
+}
+
+.error-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+        background-color: rgba(255, 80, 80, 0.18);
+        border: 1px solid rgba(255, 80, 80, 0.35);
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 0.92rem;
+        line-height: 1.4;
+    }
+}
+
+/* ── Action buttons ───────────────────────────────────── */
+.slot-action-boutons {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+button {
+    padding: 10px 40px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: transform 0.16s, filter 0.16s;
+}
+
+#fermer-button,
+#rester-button {
+    background-color: rgba(130, 130, 130, 0.825);
+    color: white;
+}
+
+#quitter-button {
+    background-color: rgba(76, 175, 80, 0.85);
+    color: white;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+button:active {
+    transform: translateY(0);
+}

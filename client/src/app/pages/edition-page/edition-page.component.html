@@ -1,0 +1,153 @@
+@if (this.isLoading()) {
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+} @else {
+<app-background-image src="assets/background-image-edition.jpeg" alt="Background Edition" />
+<app-back-button [topNav]="true" tooltip="Quitter l'éditeur et revenir à la page précédente"></app-back-button>
+
+@if (isSavePopupVisible) {
+<app-save-status-popup [status]="savePopupStatus" [errors]="saveErrors" (close)="closeSavePopup()" (confirmQuit)="onQuitConfirmed()" />
+} @if (placementErrorMessage) {
+<app-notification-popup [message]="placementErrorMessage" (closed)="closePlacementError()" />
+}
+
+<div class="edition-page-container" (click)="clearSelection()">
+    <div class="grid-controls" (click)="$event.stopPropagation()">
+        <app-button-center [isGameNameMissing]="!this.game.name.trim()" [isGameDescriptionMissing]="!this.game.description.trim()" />
+    </div>
+    <app-panel-background class="main-panel" src="assets/panel-edition.png">
+        <div class="game-information-container" (click)="$event.stopPropagation()">
+            <app-game-info-panel
+                [name]="this.game.name"
+                [description]="this.game.description"
+                [mode]="this.game.mode"
+                [gridSize]="this.game.grid.gridSize"
+                [isEditing]="this.isEdit()"
+                [saveAttempted]="this.saveAttempted"
+                (nameChange)="this.onNameChange($event)"
+                (descriptionChange)="this.onDescriptionChange($event)"
+            />
+        </div>
+
+        <div class="game-edition-container" (click)="$event.stopPropagation()">
+            <div class="grid-title">{{ this.game.name }}</div>
+
+            <app-case-game-edition
+                [gridGameSize]="this.game.grid.gridSize"
+                [tileChoice]="this.tileSelected"
+                [objectChoice]="this.objectSelected"
+                [isEdit]="this.isEdit()"
+                [gameMap]="this.gameMap"
+                (imageSource)="this.saveOnClick($event)"
+                (saveAllInformation)="this.changeStateIsSaveGameMap($event)"
+                (isGameMapModified)="this.editingGameMap($event)"
+                (isRestartModified)="this.restartGame($event)"
+                (placementError)="this.showPlacementError($event)"
+                (objectPlaced)="countObject()"
+            />
+        </div>
+
+        <div class="tools-edition-container" (click)="$event.stopPropagation()">
+            <div class="tools-panel tools-panel--tiles">
+                <h3 class="panel-title">Tuiles de terrain</h3>
+                <div class="tiles-container">
+                    <app-edition-tools
+                        [tile]="this.door"
+                        [isSelected]="tileSelected()?.tileType === door.tileType"
+                        (tileChoice)="selectTile($event)"
+                        (mouseenter)="onTileHover(door)"
+                        (mouseleave)="onTileLeave()"
+                    />
+
+                    <app-edition-tools
+                        [tile]="this.wall"
+                        [isSelected]="tileSelected()?.tileType === wall.tileType"
+                        (tileChoice)="selectTile($event)"
+                        (mouseenter)="onTileHover(wall)"
+                        (mouseleave)="onTileLeave()"
+                    />
+
+                    <app-edition-tools
+                        [tile]="this.ice"
+                        [isSelected]="tileSelected()?.tileType === ice.tileType"
+                        (tileChoice)="selectTile($event)"
+                        (mouseenter)="onTileHover(ice)"
+                        (mouseleave)="onTileLeave()"
+                    />
+
+                    <app-edition-tools
+                        [tile]="this.water"
+                        [isSelected]="tileSelected()?.tileType === water.tileType"
+                        (tileChoice)="selectTile($event)"
+                        (mouseenter)="onTileHover(water)"
+                        (mouseleave)="onTileLeave()"
+                    />
+                </div>
+
+                @if(tileHovered() || tileSelected()) {
+                <div class="description-panel">
+                    <p class="description-title">Description</p>
+                    <p class="description-content">{{ tileHovered()?.description || tileSelected()?.description }}</p>
+                </div>
+                }
+            </div>
+
+            <div class="tools-panel tools-panel--objects">
+                <h3 class="panel-title">Objets de placement</h3>
+
+                <div class="sanctuary-group">
+                    <div class="sanctuary-images-row">
+                        <app-object-tools
+                            [object]="this.sanctuaryCombat"
+                            [isSelected]="objectSelected()?.objectType === sanctuaryCombat().objectType"
+                            (objectChoice)="selectObject($event)"
+                            (mouseenter)="onObjectHover(sanctuaryCombat)"
+                            (mouseleave)="onObjectLeave()"
+                        />
+
+                        <app-object-tools
+                            [object]="this.sanctuarySante"
+                            [isSelected]="objectSelected()?.objectType === sanctuarySante().objectType"
+                            (objectChoice)="selectObject($event)"
+                            (mouseenter)="onObjectHover(sanctuarySante)"
+                            (mouseleave)="onObjectLeave()"
+                        />
+                    </div>
+
+                    <div class="sanctuary-total-box">
+                        {{ remainingSanctuaryTotal }}
+                    </div>
+                </div>
+
+                <div class="objects-container objects-container--bottom">
+                    <app-object-tools
+                        [object]="this.startingPoint"
+                        [isSelected]="objectSelected()?.objectType === startingPoint().objectType"
+                        (objectChoice)="selectObject($event)"
+                        (mouseenter)="onObjectHover(startingPoint)"
+                        (mouseleave)="onObjectLeave()"
+                    />
+
+                    @if(this.game.mode === 'CTF'){
+                    <app-object-tools
+                        [object]="this.flag"
+                        [isSelected]="objectSelected()?.objectType === flag().objectType"
+                        (objectChoice)="selectObject($event)"
+                        (mouseenter)="onObjectHover(flag)"
+                        (mouseleave)="onObjectLeave()"
+                    />
+                    }
+                </div>
+
+                @if(objectHovered() || objectSelected()) {
+                <div class="description-panel">
+                    <p class="description-title">Description</p>
+                    <p class="description-content">{{ objectHovered()?.description || objectSelected()?.description }}</p>
+                </div>
+                }
+            </div>
+        </div>
+    </app-panel-background>
+</div>
+}

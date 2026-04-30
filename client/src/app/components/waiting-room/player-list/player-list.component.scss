@@ -1,0 +1,36 @@
+$border: rgba(202, 164, 92, 0.4);
+$gold: #ffd87a;
+$bg: rgba(20, 14, 8, 0.85);
+$text: #e8d5a8;
+
+.player-list {
+    display: flex;
+    flex-direction: column;
+    background: $bg;
+    border: 1px solid $border;
+    border-radius: 8px;
+}
+
+.list-header {
+    padding: 0.6rem 1rem;
+    background: rgba(202, 164, 92, 0.12);
+    border-bottom: 1px solid $border;
+    font-weight: 700;
+    color: $gold;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+}
+
+.list-body {
+    padding: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.empty {
+    color: rgba(232, 213, 168, 0.5);
+    font-size: 0.82rem;
+    text-align: center;
+    margin-top: 1rem;
+}

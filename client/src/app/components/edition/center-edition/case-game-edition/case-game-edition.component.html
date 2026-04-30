@@ -1,0 +1,39 @@
+@if (showSanctuaryOverwriteModal()) {
+<div class="sanctuary-overwrite-overlay">
+    <div class="sanctuary-overwrite-modal">
+        <p class="sanctuary-overwrite-title">Sanctuaire présent</p>
+        <p class="sanctuary-overwrite-message">Placer cette tuile supprimera le sanctuaire 2×2 qui occupe cet espace. Voulez-vous continuer ?</p>
+        <div class="sanctuary-overwrite-actions">
+            <button class="btn-confirm" (click)="confirmSanctuaryOverwrite()">Confirmer</button>
+            <button class="btn-cancel" (click)="cancelSanctuaryOverwrite()">Annuler</button>
+        </div>
+    </div>
+</div>
+}
+
+ <div class="grid-case-container" #gridImageContainer
+  [style.--grid-size]="gridSize" [style.--grid-style]="gridStyle">
+   
+    @for(case of cases; track $index){
+        <div class="cell-container" #cell [style.--grid-style]="gridStyle" 
+        (mouseenter)="onCellMouseEnter($index)"
+        (mouseleave)="onCellMouseLeave()"
+        (mouseover)="addDeleteMaintained($event,$index)" 
+        (contextmenu)="delete($event,$index)"
+        (click)="addClick($event,$index)"
+        [attr.title]="getObjectDescription($index)"
+        >
+            <img [src]="getTileImage($index)" id="image-cell">
+            @if (getObjectImageSrc($index)) {
+                <img [src]="getObjectImageSrc($index)" [class]="isCellSanctuary($index) ? 'sanctuary-img' : 'object-img'">
+            }
+            @if (hoveredCellIndex === $index && getObjectDescription($index)) {
+                <div class="map-tooltip">{{ getObjectDescription($index) }}</div>
+            }
+        </div>
+    }
+    
+    @empty {
+        
+    }
+</div>

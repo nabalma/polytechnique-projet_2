@@ -1,0 +1,19 @@
+<div class="player-list">
+    <div class="list-header">
+        <span>Liste des Joueurs</span>
+    </div>
+
+    <div class="list-body">
+        @for (player of players; track player.id) {
+            <app-player-card
+                [player]="player"
+                [isOrganizer]="player.id === organizerId()"
+                [isCurrentPlayer]="player.id === currentPlayerId()"
+                [canKick]="currentPlayerId() === organizerId() && player.id !== organizerId()"
+                (kickPlayer)="kickPlayer.emit($event)"
+            />
+        } @empty {
+            <p class="empty">Aucun joueur dans la salle.</p>
+        }
+    </div>
+</div>

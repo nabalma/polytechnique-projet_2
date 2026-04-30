@@ -1,0 +1,56 @@
+@if (player()) {
+    <div class="player-stats-container">
+        <div class="player-header">
+            <div class="player-avatar">
+                <img [src]="player()!.avatar" [alt]="player()!.name" />
+            </div>
+            <div class="player-name">
+                {{ player()!.name }}
+                @if(player()!.hasFlag) {
+                    <span class="flag-name-badge">🚩</span>
+                }
+            </div>
+        </div>
+
+        <div class="stats-list">
+            <div class="stat-row">
+                <span class="stat-icon">❤️</span>
+                <span class="attr-name">Vie</span>
+                <span class="stat-value"><strong>{{ player()!.attributes.currentLife }}</strong> / {{ player()!.attributes.totalLife }}</span>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-icon">⚡</span>
+                <span class="attr-name">Rapidité</span>
+                <span class="stat-value"><strong>{{ player()!.attributes.speed }}</strong></span>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-icon">⚔️</span>
+                <span class="attr-name">Attaque</span>
+                <span class="dice-badge" [class.is-d6]="player()!.attributes.attackDice === 'D6'">{{ player()!.attributes.attackDice }}</span>
+                <span class="stat-value"><strong>{{ player()!.attributes.attack }}</strong></span>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-icon">🛡️</span>
+                <span class="attr-name">Défense</span>
+                <span class="dice-badge" [class.is-d6]="player()!.attributes.defenseDice === 'D6'">{{ player()!.attributes.defenseDice }}</span>
+                <span class="stat-value"><strong>{{ player()!.attributes.defense }}</strong></span>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-icon">👟</span>
+                <span class="attr-name">Mouvement</span>
+                <span class="stat-value"><strong>{{ player()!.remainingMovement }}</strong> / {{ player()!.attributes.speed }}</span>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-icon">🎯</span>
+                <span class="attr-name">Actions</span>
+                <span class="stat-value"><strong>{{ player()!.remainingActions }}</strong> / 1</span>
+            </div>
+        </div>
+
+    </div>
+}

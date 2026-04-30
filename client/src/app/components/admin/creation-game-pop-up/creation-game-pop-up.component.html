@@ -1,0 +1,43 @@
+<div class="pop-up-game-creation">
+  
+  <div class="slot slot-choixmodegame">
+    <label for="mode-game-select">Choisir le mode de jeu :</label>
+
+    <select id="mode-game-select" name="mode-game-select"
+      [(ngModel)]="selectedMode"
+    >
+    @for(mode of modes; track $index){
+      <option [ngValue]="mode">
+        {{ modeLabel(mode) }}
+      </option>
+    } @empty {
+
+    }
+    </select> 
+  </div>
+
+  <div class="slot slot-choixmodegame">
+    <label for="taille-grille-select">Choisir la taille de la grille :</label>
+
+    <select
+      id="taille-grille-select"
+      name="taille-grille-select"
+      [(ngModel)]="selectedSize"
+    >
+    @for(size of sizes; track $index){
+      <option  [ngValue]="size">
+        {{ sizeLabel(size) }}
+      </option>
+    } @empty {
+
+    }
+    </select>
+  </div>
+ 
+  <div class="slot-action-boutons">
+    <button type="button" id="annuler-button" (click)="onCancel()">Annuler</button>
+    <button type="button" id="creer-game-button" (click)="onCreate()">Créer le jeu</button>
+
+  </div>
+
+</div>

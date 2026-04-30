@@ -1,0 +1,13 @@
+<div class="character-grid">
+    @for (character of characters(); track character.id) {
+    <button
+        type="button"
+        class="character"
+        [ngClass]="{ selected: character.id === selectedId(), taken: isTaken(character) }"
+        [disabled]="isTaken(character)"
+        (click)="select(character)"
+    >
+        <img [src]="character.miniSrc" [alt]="character.name" />
+    </button>
+    }
+</div>

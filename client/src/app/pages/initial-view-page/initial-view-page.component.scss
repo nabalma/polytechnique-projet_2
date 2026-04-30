@@ -1,0 +1,160 @@
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+:host {
+    display: block;
+    animation: pageFadeIn 0.35s ease-out both;
+}
+
+.logo-top-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-top-left img {
+    width: 140px;
+    height: auto;
+}
+
+.background-container {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#background-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -48%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    animation: fadeInUp 0.5s ease both;
+}
+
+
+.panneau {
+    width: 900px;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panneau-contenu {
+    width: 78%;
+    padding-top: 140px;
+    text-align: center;
+}
+
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin: 30px 0;
+}
+
+.menu-section .button {
+    width: 34%;
+    padding: 14px;
+    font-size: 1.5rem;
+    color: #f6e6c9;
+    background: rgba(0, 0, 0, 0.35);
+    border: 4px solid #caa45c;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-section .button:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.03);
+    box-shadow: 0 0 14px rgba(202, 164, 92, 0.4);
+}
+
+.menu-section .button:active {
+    transform: scale(0.97);
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.footer-item {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: 4px 8px;
+    text-align: center;
+
+    background-color: rgba(10, 6, 2, 0.75);
+    border-top: 1px solid rgba(202, 164, 92, 0.3);
+    color: rgba(246, 230, 201, 0.7);
+    font-size: 0.75rem;
+    z-index: 10;
+
+    .team-name {
+        color: #caa45c;
+        font-weight: bold;
+    }
+}
+.music-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #caa45c;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #caa45c;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 15px rgba(202, 164, 92, 0.5);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}

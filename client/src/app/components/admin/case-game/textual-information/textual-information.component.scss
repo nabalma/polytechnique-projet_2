@@ -1,0 +1,39 @@
+.textual-information-container {
+    font-family: 'Uncial Antiqua', cursive;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #game-name {
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        margin-bottom: 6px;
+        color: #ffeeb0;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    #last-modified-date-game {
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.1px;
+    }
+
+    .info-label {
+        color: rgba(255, 200, 100, 0.7);
+        font-size: 11px;
+    }
+}
